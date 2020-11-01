@@ -20,7 +20,7 @@ public Plugin myinfo =
 	name = "FFMenu - FFDondur", 
 	author = "ByDexter", 
 	description = "", 
-	version = "1.5", 
+	version = "1.5b", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 

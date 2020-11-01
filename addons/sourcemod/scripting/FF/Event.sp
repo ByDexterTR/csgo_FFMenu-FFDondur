@@ -1,6 +1,6 @@
 public Action OnClientDead(Event event, const char[] name, bool dontBroadcast)
 {
-	if (FFAktif || DondurmaSure > -1)
+	if (FFAktif || DondurmaSure != -1)
 	{
 		int iCount_terrorist = 0;
 		for (int i = 1; i < MaxClients; i++)
