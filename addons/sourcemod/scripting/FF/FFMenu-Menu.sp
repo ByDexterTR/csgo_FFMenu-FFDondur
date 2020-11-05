@@ -292,8 +292,8 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 	}
 	else if (action == MenuAction_Cancel)
 	{
-		menugoster(param1);
-		delete menu2;
+		if (param2 == MenuCancel_ExitBack)
+			menugoster(param1);
 	}
 }
 
@@ -500,12 +500,12 @@ public int MenuA_Callback(Menu menua, MenuAction action, int param1, int param2)
 	}
 	else if (action == MenuAction_Cancel)
 	{
-		yasaklisilah(param1);
-		delete menua;
+		if (param2 == MenuCancel_ExitBack)
+			yasaklisilah(param1);
 	}
 }
 
-void gunsmenu(int client)
+public void gunsmenu(int client)
 {
 	Menu menu3 = new Menu(Menu3_Callback);
 	menu3.SetTitle("^-^ FF Menu - Silah Menü\n ");
@@ -567,7 +567,7 @@ public int Menu3_Callback(Menu menu3, MenuAction action, int param1, int param2)
 	}
 }
 
-void tabancamenu(int client)
+public void tabancamenu(int client)
 {
 	Menu menu4 = new Menu(Menu4_Callback);
 	menu4.SetTitle("^-^ FF Menu - Tabanca Menü\n ");
@@ -626,4 +626,4 @@ public int Menu4_Callback(Menu menu4, MenuAction action, int param1, int param2)
 	{
 		delete menu4;
 	}
-}
+} 

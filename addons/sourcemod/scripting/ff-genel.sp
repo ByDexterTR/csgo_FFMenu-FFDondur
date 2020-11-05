@@ -20,7 +20,7 @@ public Plugin myinfo =
 	name = "FFMenu - FFDondur", 
 	author = "ByDexter", 
 	description = "", 
-	version = "1.5b", 
+	version = "1.7", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 
@@ -95,12 +95,12 @@ public Action FFDondur(int client, int args)
 				DondurmaSure = StringToInt(arg1);
 				PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Dondurma %d saniye \x01belirlenmiştir!", client, DondurmaSure);
 				ffkapatmamenu(client);
-				return Plugin_Continue;
+				return Plugin_Handled;
 			}
 			else if (args == 0)
 			{
 				ffdondurmenu(client);
-				return Plugin_Continue;
+				return Plugin_Handled;
 			}
 		}
 		else if (!warden_iswarden(client) || !HasFlags(client, YetkiliflagStringg))
@@ -108,7 +108,7 @@ public Action FFDondur(int client, int args)
 			ReplyToCommand(client, "[SM] \x01Bu komuta erişiminiz yok!");
 			return Plugin_Handled;
 		}
-		return Plugin_Continue;
+		return Plugin_Handled;
 	}
 }
 
@@ -136,12 +136,12 @@ public Action FFMenu(int client, int args)
 				GeriSay = StringToInt(arg1);
 				PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
 				yasaklisilah(client);
-				return Plugin_Continue;
+				return Plugin_Handled;
 			}
 			else if (args == 0)
 			{
 				menugoster(client);
-				return Plugin_Continue;
+				return Plugin_Handled;
 			}
 		}
 		else if (!warden_iswarden(client) || !HasFlags(client, YetkiliflagString))
@@ -149,7 +149,7 @@ public Action FFMenu(int client, int args)
 			ReplyToCommand(client, "[SM] \x01Bu komuta erişiminiz yok!");
 			return Plugin_Handled;
 		}
-		return Plugin_Continue;
+		return Plugin_Handled;
 	}
 }
 
