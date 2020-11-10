@@ -231,11 +231,13 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 			{
 				SetCvar("sv_enablebunnyhopping", 0);
 				SetCvar("sv_autobunnyhopping", 0);
+				SetCvar("abner_bhop", 0);
 			}
 			else
 			{
 				SetCvar("sv_enablebunnyhopping", 1);
 				SetCvar("sv_autobunnyhopping", 1);
+				SetCvar("abner_bhop", 1);
 			}
 			if (revive)
 			{
@@ -251,6 +253,7 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 				sadecetabanca = false;
 			FFAktif = true;
 			Guns = true;
+			revive = false;
 			for (int i = 1; i <= MaxClients; i++)
 			{
 				if (IsClientInGame(i) && !IsFakeClient(i) && IsPlayerAlive(i) && GetClientTeam(i) == CS_TEAM_T)
@@ -534,7 +537,6 @@ public int Menu3_Callback(Menu menu3, MenuAction action, int param1, int param2)
 	{
 		if (Guns)
 		{
-			RemovePlayerItem(param1, 1);
 			char Item[32];
 			menu3.GetItem(param2, Item, sizeof(Item));
 			if (StrEqual(Item, "akver", true))
@@ -558,7 +560,6 @@ public int Menu3_Callback(Menu menu3, MenuAction action, int param1, int param2)
 		else
 		{
 			PrintToChat(param1, "[SM] Bu menüyü kullanmak için geciktin!");
-			delete menu3;
 		}
 	}
 	else if (action == MenuAction_End)
@@ -596,7 +597,6 @@ public int Menu4_Callback(Menu menu4, MenuAction action, int param1, int param2)
 	{
 		if (Guns)
 		{
-			RemovePlayerItem(param1, 2);
 			char Item[32];
 			menu4.GetItem(param2, Item, sizeof(Item));
 			if (StrEqual(Item, "dver", true))
@@ -619,7 +619,6 @@ public int Menu4_Callback(Menu menu4, MenuAction action, int param1, int param2)
 		else
 		{
 			PrintToChat(param1, "[SM] Bu menüyü kullanmak için geciktin!");
-			delete menu4;
 		}
 	}
 	else if (action == MenuAction_End)
