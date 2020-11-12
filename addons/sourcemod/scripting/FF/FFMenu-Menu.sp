@@ -64,7 +64,6 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 		else if (StrEqual(Item, "ben", true))
 		{
 			ReplyToCommand(param1, "[SM] \x01Kullanım: sm_ffmenu (Saniye)");
-			delete menu;
 		}
 		else if (StrEqual(Item, "60sn", true))
 		{
@@ -399,8 +398,8 @@ public int MenuB_Callback(Menu menub, MenuAction action, int param1, int param2)
 	}
 	else if (action == MenuAction_Cancel)
 	{
-		yasaklisilah(param1);
-		delete menub;
+		if (param2 == MenuCancel_ExitBack)
+			yasaklisilah(param1);
 	}
 }
 
