@@ -22,7 +22,6 @@ public int MenuDon_Callback(Menu menudon, MenuAction action, int param1, int par
 		if (StrEqual(Item, "kendim", true))
 		{
 			ReplyToCommand(param1, "[SM] \x01Kullanım: sm_ffdondur (Saniye)");
-			delete menudon;
 		}
 		else
 		{

@@ -246,9 +246,9 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 			{
 				SetCvar("mp_respawn_on_death_t", 0);
 			}
-			if (!Ak47 && !M4a4 && !M4a1 && !Awp)
+			if (!Ak47 && !M4a4 && !M4a1 && !Awp && !SSG)
 				sadecetabanca = true;
-			else if (Ak47 || M4a4 || M4a1 || Awp)
+			else if (Ak47 || M4a4 || M4a1 || Awp || SSG)
 				sadecetabanca = false;
 			FFAktif = true;
 			Guns = true;
@@ -335,6 +335,30 @@ void tabancaayarlama(int client)
 	{
 		menub.AddItem("hkpm", "P2000 [AÇIK]");
 	}
+	if (!Cz75)
+		menub.AddItem("czm", "CZ75 [KAPALI]");
+	else
+		menub.AddItem("czm", "CZ75 [AÇIK]");
+	if (!Tec9)
+		menub.AddItem("tecm", "TEC9 [KAPALI]");
+	else
+		menub.AddItem("tecm", "TEC9 [AÇIK]");
+	if (!P25O)
+		menub.AddItem("p250m", "P250 [KAPALI]");
+	else
+		menub.AddItem("p250m", "P250 [AÇIK]");
+	if (!Revolver)
+		menub.AddItem("revolverm", "REVOLVER [KAPALI]");
+	else
+		menub.AddItem("revolverm", "REVOLVER [AÇIK]");
+	if (!fiveseven)
+		menub.AddItem("fivesevenm", "FIVESEVEN [KAPALI]");
+	else
+		menub.AddItem("fivesevenm", "FIVESEVEN [AÇIK]");
+	if (!marazali)
+		menub.AddItem("marazalim", "ÇİFT BERETTA [KAPALI]");
+	else
+		menub.AddItem("marazalim", "ÇİFT BERETTA  [AÇIK]");
 	menub.ExitBackButton = true;
 	menub.ExitButton = false;
 	menub.Display(client, MENU_TIME_FOREVER);
@@ -390,6 +414,48 @@ public int MenuB_Callback(Menu menub, MenuAction action, int param1, int param2)
 				P2000 = false;
 			}
 		}
+		else if (StrEqual(Item, "czm", true))
+		{
+			if (!Cz75)
+				Cz75 = true;
+			else
+				Cz75 = false;
+		}
+		else if (StrEqual(Item, "tecm", true))
+		{
+			if (!Tec9)
+				Tec9 = true;
+			else
+				Tec9 = false;
+		}
+		else if (StrEqual(Item, "p250m", true))
+		{
+			if (!P25O)
+				P25O = true;
+			else
+				P25O = false;
+		}
+		else if (StrEqual(Item, "revolverm", true))
+		{
+			if (!Revolver)
+				Revolver = true;
+			else
+				Revolver = false;
+		}
+		else if (StrEqual(Item, "fivesevenm", true))
+		{
+			if (!fiveseven)
+				fiveseven = true;
+			else
+				fiveseven = false;
+		}
+		else if (StrEqual(Item, "marazalim", true))
+		{
+			if (!marazali)
+				marazali = true;
+			else
+				marazali = false;
+		}
 		tabancaayarlama(param1);
 	}
 	else if (action == MenuAction_End)
@@ -439,6 +505,10 @@ void silahayarlama(int client)
 	{
 		menua.AddItem("awpm", "AWP [AÇIK]");
 	}
+	if (!SSG)
+		menua.AddItem("ssgm", "SSG08 [KAPALI]");
+	else
+		menua.AddItem("ssgm", "SSG08 [AÇIK]");
 	menua.ExitBackButton = true;
 	menua.ExitButton = false;
 	menua.Display(client, MENU_TIME_FOREVER);
@@ -494,6 +564,13 @@ public int MenuA_Callback(Menu menua, MenuAction action, int param1, int param2)
 				Awp = false;
 			}
 		}
+		else if (StrEqual(Item, "ssgm", true))
+		{
+			if (!SSG)
+				SSG = true;
+			else
+				SSG = false;
+		}
 		silahayarlama(param1);
 	}
 	else if (action == MenuAction_End)
@@ -527,6 +604,8 @@ public void gunsmenu(int client)
 	{
 		menu3.AddItem("awpver", "AWP");
 	}
+	if (SSG)
+		menu3.AddItem("ssgver", "SSG08");
 	menu3.Display(client, MENU_TIME_FOREVER);
 }
 
@@ -553,6 +632,10 @@ public int Menu3_Callback(Menu menu3, MenuAction action, int param1, int param2)
 			else if (StrEqual(Item, "awpver", true))
 			{
 				GivePlayerItem(param1, "weapon_awp");
+			}
+			else if (StrEqual(Item, "ssgver", true))
+			{
+				GivePlayerItem(param1, "weapon_ssg08");
 			}
 			tabancamenu(param1);
 		}
@@ -587,6 +670,18 @@ public void tabancamenu(int client)
 	{
 		menu4.AddItem("pver", "P2000");
 	}
+	if (Cz75)
+		menu4.AddItem("czver", "CZ75");
+	if (Tec9)
+		menu4.AddItem("tecver", "TEC9");
+	if (P25O)
+		menu4.AddItem("p250ver", "P250");
+	if (Revolver)
+		menu4.AddItem("revolverver", "REVOLVER");
+	if (fiveseven)
+		menu4.AddItem("fivesevenver", "FIVESEVEN");
+	if (marazali)
+		menu4.AddItem("marazaliver", "ÇİFT BERETTA");
 	menu4.Display(client, MENU_TIME_FOREVER);
 }
 
@@ -613,6 +708,30 @@ public int Menu4_Callback(Menu menu4, MenuAction action, int param1, int param2)
 			else if (StrEqual(Item, "pver", true))
 			{
 				GivePlayerItem(param1, "weapon_hkp2000");
+			}
+			else if (StrEqual(Item, "czver", true))
+			{
+				GivePlayerItem(param1, "weapon_cz75a");
+			}
+			else if (StrEqual(Item, "tecver", true))
+			{
+				GivePlayerItem(param1, "weapon_tec9");
+			}
+			else if (StrEqual(Item, "p250ver", true))
+			{
+				GivePlayerItem(param1, "weapon_p250");
+			}
+			else if (StrEqual(Item, "revolverver", true))
+			{
+				GivePlayerItem(param1, "weapon_revolver");
+			}
+			else if (StrEqual(Item, "fivesevenver", true))
+			{
+				GivePlayerItem(param1, "weapon_fiveseven");
+			}
+			else if (StrEqual(Item, "marazaliver", true))
+			{
+				GivePlayerItem(param1, "weapon_elite");
 			}
 		}
 		else
