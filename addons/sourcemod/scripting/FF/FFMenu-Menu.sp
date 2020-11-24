@@ -1,4 +1,4 @@
-void menugoster(int client)
+Menu menugoster()
 {
 	Menu menu = new Menu(Menu_Callback);
 	menu.SetTitle("^-^ FF Menu - Ne Zaman FF Açılsın?");
@@ -20,10 +20,10 @@ void menugoster(int client)
 	menu.AddItem("15sn", "15 Saniye Sonra");
 	menu.AddItem("10sn", "10 Saniye Sonra");
 	menu.AddItem("5sn", "5 Saniye Sonra");
-	menu.Display(client, MENU_TIME_FOREVER);
+	return menu;
 }
 
-public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
+public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
@@ -31,7 +31,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 		menu.GetItem(param2, Item, sizeof(Item));
 		if (StrEqual(Item, "ffbaslat", true))
 		{
-			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04açılmıştır!", param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04açılmıştır!", client);
 			if (!FFAktif)
 				FFAktif = true;
 			if (g_gerisaytimer != null)
@@ -59,11 +59,11 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 				SetCvar("mp_friendlyfire", 0);
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04iptal edilmiştir!", param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04iptal edilmiştir!", client);
 		}
 		else if (StrEqual(Item, "ben", true))
 		{
-			ReplyToCommand(param1, "[SM] \x01Kullanım: sm_ffmenu (Saniye)");
+			ReplyToCommand(client, "[SM] \x01Kullanım: sm_ffmenu (Saniye)");
 		}
 		else if (StrEqual(Item, "60sn", true))
 		{
@@ -76,8 +76,8 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 				SetCvar("mp_friendlyfire", 0);
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", param1, GeriSay);
-			yasaklisilah(param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "50sn", true))
 		{
@@ -90,8 +90,8 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 				SetCvar("mp_friendlyfire", 0);
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", param1, GeriSay);
-			yasaklisilah(param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "45sn", true))
 		{
@@ -104,8 +104,8 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 				SetCvar("mp_friendlyfire", 0);
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", param1, GeriSay);
-			yasaklisilah(param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "40sn", true))
 		{
@@ -118,8 +118,8 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 				SetCvar("mp_friendlyfire", 0);
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", param1, GeriSay);
-			yasaklisilah(param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "30sn", true))
 		{
@@ -132,8 +132,8 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 				SetCvar("mp_friendlyfire", 0);
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", param1, GeriSay);
-			yasaklisilah(param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "20sn", true))
 		{
@@ -146,8 +146,8 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 				SetCvar("mp_friendlyfire", 0);
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", param1, GeriSay);
-			yasaklisilah(param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "15sn", true))
 		{
@@ -160,8 +160,8 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 				SetCvar("mp_friendlyfire", 0);
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", param1, GeriSay);
-			yasaklisilah(param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "10sn", true))
 		{
@@ -174,8 +174,8 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 				SetCvar("mp_friendlyfire", 0);
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", param1, GeriSay);
-			yasaklisilah(param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "5sn", true))
 		{
@@ -188,8 +188,8 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 				SetCvar("mp_friendlyfire", 0);
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", param1, GeriSay);
-			yasaklisilah(param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 	}
 	else if (action == MenuAction_End)
@@ -198,7 +198,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int param1, int param2)
 	}
 }
 
-void yasaklisilah(int client)
+Menu yasaklisilah()
 {
 	Menu menu2 = new Menu(Menu2_Callback);
 	menu2.SetTitle("^-^ FF Menu - Ayarlar");
@@ -219,10 +219,10 @@ void yasaklisilah(int client)
 		menu2.AddItem("kafaayarla", "Sadece HS: [KAPALI]");
 	menu2.ExitBackButton = true;
 	menu2.ExitButton = false;
-	menu2.Display(client, MENU_TIME_FOREVER);
+	return menu2;
 }
 
-public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
+public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
@@ -270,7 +270,10 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 				if (IsClientInGame(i) && !IsFakeClient(i) && IsPlayerAlive(i) && GetClientTeam(i) == CS_TEAM_T)
 				{
 					GivePlayerItem(i, "weapon_hegrenade");
-					FakeClientCommand(i, "sm_guns");
+					if (!sadecetabanca)
+						gunsmenu().Display(i, MENU_TIME_FOREVER);
+					else
+						tabancamenu().Display(i, MENU_TIME_FOREVER);
 				}
 			}
 			g_gerisaytimer = CreateTimer(1.0, GeriSayTimer, _, TIMER_REPEAT);
@@ -281,15 +284,15 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 				onlyhs = false;
 			else
 				onlyhs = true;
-			yasaklisilah(param1);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "ayarlasilah", true))
 		{
-			silahayarlama(param1);
+			silahayarlama().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "ayarlatabanca", true))
 		{
-			tabancaayarlama(param1);
+			tabancaayarlama().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "bunnyayarla", true))
 		{
@@ -297,7 +300,7 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 				bac = false;
 			else
 				bac = true;
-			yasaklisilah(param1);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 		else if (StrEqual(Item, "canlandirmaayarla", true))
 		{
@@ -305,7 +308,7 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 				revive = false;
 			else
 				revive = true;
-			yasaklisilah(param1);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 	}
 	else if (action == MenuAction_End)
@@ -315,11 +318,11 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 	else if (action == MenuAction_Cancel)
 	{
 		if (param2 == MenuCancel_ExitBack)
-			menugoster(param1);
+			menugoster().Display(client, MENU_TIME_FOREVER);
 	}
 }
 
-void tabancaayarlama(int client)
+Menu tabancaayarlama()
 {
 	Menu menub = new Menu(MenuB_Callback);
 	menub.SetTitle("^-^ FF Menu - Yasaklı Tabancalar");
@@ -378,13 +381,13 @@ void tabancaayarlama(int client)
 	if (!marazali)
 		menub.AddItem("marazalim", "ÇİFT BERETTA [KAPALI]");
 	else
-		menub.AddItem("marazalim", "ÇİFT BERETTA  [AÇIK]");
+		menub.AddItem("marazalim", "ÇİFT BERETTA [AÇIK]");
 	menub.ExitBackButton = true;
 	menub.ExitButton = false;
-	menub.Display(client, MENU_TIME_FOREVER);
+	return menub;
 }
 
-public int MenuB_Callback(Menu menub, MenuAction action, int param1, int param2)
+public int MenuB_Callback(Menu menub, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
@@ -476,7 +479,7 @@ public int MenuB_Callback(Menu menub, MenuAction action, int param1, int param2)
 			else
 				marazali = false;
 		}
-		tabancaayarlama(param1);
+		tabancaayarlama().Display(client, MENU_TIME_FOREVER);
 	}
 	else if (action == MenuAction_End)
 	{
@@ -485,11 +488,11 @@ public int MenuB_Callback(Menu menub, MenuAction action, int param1, int param2)
 	else if (action == MenuAction_Cancel)
 	{
 		if (param2 == MenuCancel_ExitBack)
-			yasaklisilah(param1);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 	}
 }
 
-void silahayarlama(int client)
+Menu silahayarlama()
 {
 	Menu menua = new Menu(MenuA_Callback);
 	menua.SetTitle("^-^ FF Menu - Yasaklı Ana Silahlar");
@@ -517,6 +520,10 @@ void silahayarlama(int client)
 	{
 		menua.AddItem("m4a1m", "M4A1-S [AÇIK]");
 	}
+	if (!Aug)
+		menua.AddItem("augm", "AUG [KAPALI]");
+	else
+		menua.AddItem("augm", "AUG [AÇIK]");
 	if (!Awp)
 	{
 		menua.AddItem("awpm", "AWP [KAPALI]");
@@ -531,10 +538,10 @@ void silahayarlama(int client)
 		menua.AddItem("ssgm", "SSG08 [AÇIK]");
 	menua.ExitBackButton = true;
 	menua.ExitButton = false;
-	menua.Display(client, MENU_TIME_FOREVER);
+	return menua;
 }
 
-public int MenuA_Callback(Menu menua, MenuAction action, int param1, int param2)
+public int MenuA_Callback(Menu menua, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
@@ -573,6 +580,17 @@ public int MenuA_Callback(Menu menua, MenuAction action, int param1, int param2)
 				M4a1 = false;
 			}
 		}
+		else if (StrEqual(Item, "augm", true))
+		{
+			if (!Aug)
+			{
+				Aug = true;
+			}
+			else
+			{
+				Aug = false;
+			}
+		}
 		else if (StrEqual(Item, "awpm", true))
 		{
 			if (!Awp)
@@ -591,7 +609,7 @@ public int MenuA_Callback(Menu menua, MenuAction action, int param1, int param2)
 			else
 				SSG = false;
 		}
-		silahayarlama(param1);
+		silahayarlama().Display(client, MENU_TIME_FOREVER);
 	}
 	else if (action == MenuAction_End)
 	{
@@ -600,11 +618,11 @@ public int MenuA_Callback(Menu menua, MenuAction action, int param1, int param2)
 	else if (action == MenuAction_Cancel)
 	{
 		if (param2 == MenuCancel_ExitBack)
-			yasaklisilah(param1);
+			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 	}
 }
 
-public void gunsmenu(int client)
+Menu gunsmenu()
 {
 	Menu menu3 = new Menu(Menu3_Callback);
 	menu3.SetTitle("^-^ FF Menu - Silah Menü\n ");
@@ -620,16 +638,18 @@ public void gunsmenu(int client)
 	{
 		menu3.AddItem("a1ver", "M4A1-S");
 	}
+	if (Aug)
+		menu3.AddItem("augver", "AUG");
 	if (Awp)
 	{
 		menu3.AddItem("awpver", "AWP");
 	}
 	if (SSG)
 		menu3.AddItem("ssgver", "SSG08");
-	menu3.Display(client, MENU_TIME_FOREVER);
+	return menu3;
 }
 
-public int Menu3_Callback(Menu menu3, MenuAction action, int param1, int param2)
+public int Menu3_Callback(Menu menu3, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
@@ -639,29 +659,33 @@ public int Menu3_Callback(Menu menu3, MenuAction action, int param1, int param2)
 			menu3.GetItem(param2, Item, sizeof(Item));
 			if (StrEqual(Item, "akver", true))
 			{
-				GivePlayerItem(param1, "weapon_ak47");
+				GivePlayerItem(client, "weapon_ak47");
 			}
 			else if (StrEqual(Item, "a4ver", true))
 			{
-				GivePlayerItem(param1, "weapon_m4a1");
+				GivePlayerItem(client, "weapon_m4a1");
 			}
 			else if (StrEqual(Item, "a1ver", true))
 			{
-				GivePlayerItem(param1, "weapon_m4a1_silencer");
+				GivePlayerItem(client, "weapon_m4a1_silencer");
+			}
+			else if (StrEqual(Item, "augver", true))
+			{
+				GivePlayerItem(client, "weapon_aug");
 			}
 			else if (StrEqual(Item, "awpver", true))
 			{
-				GivePlayerItem(param1, "weapon_awp");
+				GivePlayerItem(client, "weapon_awp");
 			}
 			else if (StrEqual(Item, "ssgver", true))
 			{
-				GivePlayerItem(param1, "weapon_ssg08");
+				GivePlayerItem(client, "weapon_ssg08");
 			}
-			tabancamenu(param1);
+			tabancamenu().Display(client, MENU_TIME_FOREVER);
 		}
 		else
 		{
-			PrintToChat(param1, "[SM] Bu menüyü kullanmak için geciktin!");
+			PrintToChat(client, "[SM] Bu menüyü kullanmak için geciktin!");
 		}
 	}
 	else if (action == MenuAction_End)
@@ -670,7 +694,7 @@ public int Menu3_Callback(Menu menu3, MenuAction action, int param1, int param2)
 	}
 }
 
-public void tabancamenu(int client)
+Menu tabancamenu()
 {
 	Menu menu4 = new Menu(Menu4_Callback);
 	menu4.SetTitle("^-^ FF Menu - Tabanca Menü\n ");
@@ -702,10 +726,10 @@ public void tabancamenu(int client)
 		menu4.AddItem("fivesevenver", "FIVESEVEN");
 	if (marazali)
 		menu4.AddItem("marazaliver", "ÇİFT BERETTA");
-	menu4.Display(client, MENU_TIME_FOREVER);
+	return menu4;
 }
 
-public int Menu4_Callback(Menu menu4, MenuAction action, int param1, int param2)
+public int Menu4_Callback(Menu menu4, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
@@ -715,48 +739,48 @@ public int Menu4_Callback(Menu menu4, MenuAction action, int param1, int param2)
 			menu4.GetItem(param2, Item, sizeof(Item));
 			if (StrEqual(Item, "dver", true))
 			{
-				GivePlayerItem(param1, "weapon_deagle");
+				GivePlayerItem(client, "weapon_deagle");
 			}
 			else if (StrEqual(Item, "uver", true))
 			{
-				GivePlayerItem(param1, "weapon_usp_silencer");
+				GivePlayerItem(client, "weapon_usp_silencer");
 			}
 			else if (StrEqual(Item, "gver", true))
 			{
-				GivePlayerItem(param1, "weapon_glock");
+				GivePlayerItem(client, "weapon_glock");
 			}
 			else if (StrEqual(Item, "pver", true))
 			{
-				GivePlayerItem(param1, "weapon_hkp2000");
+				GivePlayerItem(client, "weapon_hkp2000");
 			}
 			else if (StrEqual(Item, "czver", true))
 			{
-				GivePlayerItem(param1, "weapon_cz75a");
+				GivePlayerItem(client, "weapon_cz75a");
 			}
 			else if (StrEqual(Item, "tecver", true))
 			{
-				GivePlayerItem(param1, "weapon_tec9");
+				GivePlayerItem(client, "weapon_tec9");
 			}
 			else if (StrEqual(Item, "p250ver", true))
 			{
-				GivePlayerItem(param1, "weapon_p250");
+				GivePlayerItem(client, "weapon_p250");
 			}
 			else if (StrEqual(Item, "revolverver", true))
 			{
-				GivePlayerItem(param1, "weapon_revolver");
+				GivePlayerItem(client, "weapon_revolver");
 			}
 			else if (StrEqual(Item, "fivesevenver", true))
 			{
-				GivePlayerItem(param1, "weapon_fiveseven");
+				GivePlayerItem(client, "weapon_fiveseven");
 			}
 			else if (StrEqual(Item, "marazaliver", true))
 			{
-				GivePlayerItem(param1, "weapon_elite");
+				GivePlayerItem(client, "weapon_elite");
 			}
 		}
 		else
 		{
-			PrintToChat(param1, "[SM] Bu menüyü kullanmak için geciktin!");
+			PrintToChat(client, "[SM] Bu menüyü kullanmak için geciktin!");
 		}
 	}
 	else if (action == MenuAction_End)

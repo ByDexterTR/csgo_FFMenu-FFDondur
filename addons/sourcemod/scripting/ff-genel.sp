@@ -24,7 +24,7 @@ public Plugin myinfo =
 	name = "FFMenu - FFDondur", 
 	author = "ByDexter", 
 	description = "", 
-	version = "1.8b - Only Hs Mode", 
+	version = "1.8c - New Weapon", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 
@@ -38,6 +38,7 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_ffmenu0", FFMenuiptal);
 	RegConsoleCmd("sm_ffac", FFAcKomut);
 	RegConsoleCmd("sm_ffkapat", FFKapatKomut);
+	RegConsoleCmd("sm_ffiptal", FFKapatKomut);
 	RegConsoleCmd("sm_guns", SilahMenu);
 	HookEvent("round_start", RoundStartEnd, EventHookMode_PostNoCopy);
 	HookEvent("round_end", RoundStartEnd, EventHookMode_PostNoCopy);
@@ -96,12 +97,12 @@ public Action FFDondur(int client, int args)
 					delete g_gerisaytimerr;
 				DondurmaSure = StringToInt(arg1);
 				PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Dondurma %d saniye \x01belirlenmiştir!", client, DondurmaSure);
-				ffkapatmamenu(client);
+				ffkapatmamenu().Display(client, MENU_TIME_FOREVER);
 				return Plugin_Handled;
 			}
 			else if (args == 0)
 			{
-				ffdondurmenu(client);
+				ffdondurmenu().Display(client, MENU_TIME_FOREVER);
 				return Plugin_Handled;
 			}
 		}
@@ -137,12 +138,12 @@ public Action FFMenu(int client, int args)
 					delete g_gerisaytimer;
 				GeriSay = StringToInt(arg1);
 				PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
-				yasaklisilah(client);
+				yasaklisilah().Display(client, MENU_TIME_FOREVER);
 				return Plugin_Handled;
 			}
 			else if (args == 0)
 			{
-				menugoster(client);
+				menugoster().Display(client, MENU_TIME_FOREVER);
 				return Plugin_Handled;
 			}
 		}
@@ -275,14 +276,14 @@ public Action SilahMenu(int client, int args)
 		if (Guns)
 		{
 			if (!sadecetabanca)
-				gunsmenu(client);
+				gunsmenu().Display(client, MENU_TIME_FOREVER);
 			else
-				tabancamenu(client);
+				tabancamenu().Display(client, MENU_TIME_FOREVER);
 			return Plugin_Continue;
 		}
 		else
 		{
-			ReplyToCommand(client, "[SM] \x01Bu komutu şu an \x04kullanamazsın!");
+			ReplyToCommand(client, "[SM] \x01Bu komutu kullanmak için geciktin!");
 			return Plugin_Handled;
 		}
 	}

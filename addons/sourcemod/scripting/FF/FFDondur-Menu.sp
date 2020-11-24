@@ -1,4 +1,4 @@
-void ffdondurmenu(int client)
+Menu ffdondurmenu()
 {
 	Menu menudon = new Menu(MenuDon_Callback);
 	menudon.SetTitle("^-^ FFDondur - Ne Zaman Freeze Atılsın?");
@@ -10,10 +10,10 @@ void ffdondurmenu(int client)
 	menudon.AddItem("20san", "20 Saniye Sonra");
 	menudon.AddItem("10san", "10 Saniye Sonra");
 	menudon.AddItem("5san", "5 Saniye Sonra");
-	menudon.Display(client, MENU_TIME_FOREVER);
+	return menudon;
 }
 
-public int MenuDon_Callback(Menu menudon, MenuAction action, int param1, int param2)
+public int MenuDon_Callback(Menu menudon, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
@@ -21,7 +21,7 @@ public int MenuDon_Callback(Menu menudon, MenuAction action, int param1, int par
 		menudon.GetItem(param2, Item, sizeof(Item));
 		if (StrEqual(Item, "kendim", true))
 		{
-			ReplyToCommand(param1, "[SM] \x01Kullanım: sm_ffdondur (Saniye)");
+			ReplyToCommand(client, "[SM] \x01Kullanım: sm_ffdondur (Saniye)");
 		}
 		else
 		{
@@ -55,8 +55,8 @@ public int MenuDon_Callback(Menu menudon, MenuAction action, int param1, int par
 			}
 			if (g_gerisaytimerr != null)
 				delete g_gerisaytimerr;
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Dondurma %d saniye \x01belirlenmiştir!", param1, DondurmaSure);
-			ffkapatmamenu(param1);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Dondurma %d saniye \x01belirlenmiştir!", client, DondurmaSure);
+			ffkapatmamenu().Display(client, MENU_TIME_FOREVER);
 		}
 	}
 	else if (action == MenuAction_End)
@@ -65,7 +65,7 @@ public int MenuDon_Callback(Menu menudon, MenuAction action, int param1, int par
 	}
 }
 
-void ffkapatmamenu(int client)
+Menu ffkapatmamenu()
 {
 	Menu menudon2 = new Menu(MenuDon2_Callback);
 	menudon2.SetTitle("^-^ FFDondur - Ne Zaman FF Kapatılsın?");
@@ -84,10 +84,10 @@ void ffkapatmamenu(int client)
 		menudon2.AddItem("10sne", "10 Saniye Sonra");
 	if (DondurmaSure >= 5)
 		menudon2.AddItem("5sne", "5 Saniye Sonra");
-	menudon2.Display(client, MENU_TIME_FOREVER);
+	return menudon2;
 }
 
-public int MenuDon2_Callback(Menu menudon2, MenuAction action, int param1, int param2)
+public int MenuDon2_Callback(Menu menudon2, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
@@ -107,7 +107,7 @@ public int MenuDon2_Callback(Menu menudon2, MenuAction action, int param1, int p
 		}
 		else if (StrEqual(Item, "40sne", true))
 		{
-			KapatmaSure = 45;
+			KapatmaSure = 40;
 		}
 		else if (StrEqual(Item, "30sne", true))
 		{
@@ -127,11 +127,11 @@ public int MenuDon2_Callback(Menu menudon2, MenuAction action, int param1, int p
 		}
 		if (g_gerisaytimerr != null)
 			delete g_gerisaytimerr;
-		PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Kapatma %d saniye \x01belirlenmiştir!", param1, KapatmaSure);
-		g_Gidilecekyerbelirten[param1] = true;
+		PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Kapatma %d saniye \x01belirlenmiştir!", client, KapatmaSure);
+		g_Gidilecekyerbelirten[client] = true;
 		Handle ScreenText = CreateHudSynchronizer();
 		SetHudTextParams(-1.0, -0.35, 3.0, 0, 255, 0, 0, 2, 1.0, 0.01, 0.01);
-		ShowSyncHudText(param1, ScreenText, "Nereye Gidilsin?");
+		ShowSyncHudText(client, ScreenText, "Nereye Gidilsin?");
 		delete ScreenText;
 	}
 	else if (action == MenuAction_End)
