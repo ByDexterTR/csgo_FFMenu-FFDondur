@@ -60,14 +60,7 @@ public Action GeriSayTimer(Handle timer, any data)
 {
 	if (GeriSay > -1)
 	{
-		int maxent = GetMaxEntities(); char weapon[64];
-		for (int i = MaxClients; i < maxent; i++)
-		{
-			if (IsValidEdict(i) && IsValidEntity(i))
-			{
-				GetEdictClassname(i, weapon, sizeof(weapon)); if ((StrContains(weapon, "weapon_") != -1 || StrContains(weapon, "item_") != -1) && GetEntDataEnt2(i, g_WeaponParent) == -1)RemoveEdict(i);
-			}
-		}
+		YerdekiSilahlariSil();
 		for (int i = 1; i <= MaxClients; i++)
 		{
 			if (IsClientInGame(i) && !IsFakeClient(i))

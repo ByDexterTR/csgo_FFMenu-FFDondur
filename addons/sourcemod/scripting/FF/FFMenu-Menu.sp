@@ -213,6 +213,10 @@ void yasaklisilah(int client)
 		menu2.AddItem("canlandirmaayarla", "Oto Respawn: [AÇIK]");
 	else
 		menu2.AddItem("canlandirmaayarla", "Oto Respawn: [KAPALI]");
+	if (onlyhs)
+		menu2.AddItem("kafaayarla", "Sadece HS: [AÇIK]");
+	else
+		menu2.AddItem("kafaayarla", "Sadece HS: [KAPALI]");
 	menu2.ExitBackButton = true;
 	menu2.ExitButton = false;
 	menu2.Display(client, MENU_TIME_FOREVER);
@@ -246,6 +250,14 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 			{
 				SetCvar("mp_respawn_on_death_t", 0);
 			}
+			if (onlyhs)
+			{
+				SetCvar("mp_damage_headshot_only", 1);
+			}
+			else
+			{
+				SetCvar("mp_damage_headshot_only", 0);
+			}
 			if (!Ak47 && !M4a4 && !M4a1 && !Awp && !SSG)
 				sadecetabanca = true;
 			else if (Ak47 || M4a4 || M4a1 || Awp || SSG)
@@ -262,6 +274,14 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int param1, int param2)
 				}
 			}
 			g_gerisaytimer = CreateTimer(1.0, GeriSayTimer, _, TIMER_REPEAT);
+		}
+		else if (StrEqual(Item, "kafaayarla", true))
+		{
+			if (onlyhs)
+				onlyhs = false;
+			else
+				onlyhs = true;
+			yasaklisilah(param1);
 		}
 		else if (StrEqual(Item, "ayarlasilah", true))
 		{

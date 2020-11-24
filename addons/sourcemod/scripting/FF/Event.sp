@@ -33,6 +33,7 @@ public Action RoundStartEnd(Event event, const char[] name, bool dontBroadcast)
 	if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)SetCvar("mp_teammates_are_enemies", 0);
 	if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)SetCvar("mp_friendlyfire", 0);
 	if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)SetCvar("mp_respawn_on_death_t", 0);
+	if (GetConVarInt(FindConVar("mp_damage_headshot_only")) != 0)SetCvar("mp_damage_headshot_only", 0);
 }
 
 public Action OnClientSayCommand(int client, const char[] command, const char[] sArgs)
@@ -51,4 +52,4 @@ public Action OnClientSayCommand(int client, const char[] command, const char[] 
 			delete ScreenText;
 		}
 	}
-}
+} 

@@ -2,7 +2,11 @@
 #include <cstrike>
 #include <sdktools>
 #include <warden>
+#undef REQUIRE_EXTENSIONS
+#undef REQUIRE_PLUGIN
 #include <hgr>
+#define REQUIRE_EXTENSIONS
+#define REQUIRE_PLUGIN
 
 #include "FF/Global.sp"
 #include "FF/Stocks.sp"
@@ -20,7 +24,7 @@ public Plugin myinfo =
 	name = "FFMenu - FFDondur", 
 	author = "ByDexter", 
 	description = "", 
-	version = "1.8", 
+	version = "1.8b - Only Hs Mode", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 
@@ -38,7 +42,6 @@ public void OnPluginStart()
 	HookEvent("round_start", RoundStartEnd, EventHookMode_PostNoCopy);
 	HookEvent("round_end", RoundStartEnd, EventHookMode_PostNoCopy);
 	HookEvent("player_death", OnClientDead, EventHookMode_PostNoCopy);
-	g_WeaponParent = FindSendPropInfo("CBaseCombatWeapon", "m_hOwnerEntity");
 	g_Yetkiliflag = CreateConVar("sm_ffmenu_flag", "q", "FFMenu komutçu harici verebilecek kişilerin yetkisi");
 	g_Yetkiliflagg = CreateConVar("sm_ffdondur_yetki", "q", "FFDondur komutçu harici verebilecek kişilerin yetkisi");
 	AutoExecConfig(true, "FFGenel", "ByDexter");
@@ -64,12 +67,11 @@ public Action FFDonduriptal(int client, int args)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Dondur \x01iptal edildi!", client);
 			return Plugin_Handled;
 		}
-		else if (!warden_iswarden(client) || !HasFlags(client, YetkiliflagStringg))
+		else
 		{
 			ReplyToCommand(client, "[SM] \x01Bu komuta erişiminiz yok!");
 			return Plugin_Handled;
 		}
-		return Plugin_Handled;
 	}
 }
 
@@ -103,7 +105,7 @@ public Action FFDondur(int client, int args)
 				return Plugin_Handled;
 			}
 		}
-		else if (!warden_iswarden(client) || !HasFlags(client, YetkiliflagStringg))
+		else
 		{
 			ReplyToCommand(client, "[SM] \x01Bu komuta erişiminiz yok!");
 			return Plugin_Handled;
@@ -144,7 +146,7 @@ public Action FFMenu(int client, int args)
 				return Plugin_Handled;
 			}
 		}
-		else if (!warden_iswarden(client) || !HasFlags(client, YetkiliflagString))
+		else
 		{
 			ReplyToCommand(client, "[SM] \x01Bu komuta erişiminiz yok!");
 			return Plugin_Handled;
@@ -181,12 +183,11 @@ public Action FFAcKomut(int client, int args)
 				SetCvar("mp_respawn_on_death_t", 0);
 			return Plugin_Handled;
 		}
-		else if (!warden_iswarden(client) || !HasFlags(client, YetkiliflagString))
+		else
 		{
 			ReplyToCommand(client, "[SM] \x01Bu komuta erişiminiz yok!");
 			return Plugin_Handled;
 		}
-		return Plugin_Handled;
 	}
 }
 
@@ -218,12 +219,11 @@ public Action FFKapatKomut(int client, int args)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04iptal edilmiştir!", client);
 			return Plugin_Handled;
 		}
-		else if (!warden_iswarden(client) || !HasFlags(client, YetkiliflagString))
+		else
 		{
 			ReplyToCommand(client, "[SM] \x01Bu komuta erişiminiz yok!");
 			return Plugin_Handled;
 		}
-		return Plugin_Handled;
 	}
 }
 
@@ -255,12 +255,11 @@ public Action FFMenuiptal(int client, int args)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04iptal edilmiştir!", client);
 			return Plugin_Handled;
 		}
-		else if (!warden_iswarden(client) || !HasFlags(client, YetkiliflagString))
+		else
 		{
 			ReplyToCommand(client, "[SM] \x01Bu komuta erişiminiz yok!");
 			return Plugin_Handled;
 		}
-		return Plugin_Handled;
 	}
 }
 
@@ -287,4 +286,4 @@ public Action SilahMenu(int client, int args)
 			return Plugin_Handled;
 		}
 	}
-}
+} 

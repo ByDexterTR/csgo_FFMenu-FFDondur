@@ -1,13 +1,13 @@
-void SetCvar(char cvarName[64], int value)
+stock void SetCvar(char[] cvarName, int value)
 {
-	Handle IntCvar = FindConVar(cvarName);
+	ConVar IntCvar = FindConVar(cvarName);
 	if (IntCvar == null)return;
-	int flags = GetConVarFlags(IntCvar);
+	int flags = IntCvar.Flags;
 	flags &= ~FCVAR_NOTIFY;
-	SetConVarFlags(IntCvar, flags);
-	SetConVarInt(IntCvar, value);
+	IntCvar.Flags = flags;
+	IntCvar.IntValue = value;
 	flags |= FCVAR_NOTIFY;
-	SetConVarFlags(IntCvar, flags);
+	IntCvar.Flags = flags;
 }
 
 public Action HGR_OnClientHook(int client)
@@ -28,40 +28,37 @@ public Action HGR_OnClientRope(int client)
 	return Plugin_Continue;
 }
 
-bool HasFlags(int client, char[] sFlags)
+stock bool HasFlags(int client, const char[] flags)
 {
-	if (StrEqual(sFlags, "public", false) || StrEqual(sFlags, "", false))return true; if (StrEqual(sFlags, "none", false))return false; AdminId id = GetUserAdmin(client); if (id == INVALID_ADMIN_ID)return false; if (CheckCommandAccess(client, "sm_not_a_command", ADMFLAG_ROOT, true))return true; int iCount, iFound, flags;
-	if (StrContains(sFlags, ";", false) != -1)
+	int iCount = 0;
+	char sflagNeed[22][8], sflagFormat[64];
+	bool bEntitled = false;
+	Format(sflagFormat, sizeof(sflagFormat), flags);
+	ReplaceString(sflagFormat, sizeof(sflagFormat), " ", "");
+	iCount = ExplodeString(sflagFormat, ",", sflagNeed, sizeof(sflagNeed), sizeof(sflagNeed[]));
+	for (int i = 0; i < iCount; i++)
 	{
-		int c = 0, iStrCount = 0;
-		while (sFlags[c] != '\0')
+		if ((GetUserFlagBits(client) & ReadFlagString(sflagNeed[i])) || (GetUserFlagBits(client) & ADMFLAG_ROOT))
 		{
-			if (sFlags[c++] == ';')iStrCount++;
-		}
-		iStrCount++; char[][] sTempArray = new char[iStrCount][30]; ExplodeString(sFlags, ";", sTempArray, iStrCount, 30);
-		for (int i = 0; i < iStrCount; i++)
-		{
-			flags = ReadFlagString(sTempArray[i]); iCount = 0; iFound = 0;
-			for (int j = 0; j <= 20; j++)
-			{
-				if (flags & (1 << j))
-				{
-					iCount++; if (GetAdminFlag(id, view_as<AdminFlag>(j)))iFound++;
-				}
-			}
-			if (iCount == iFound)return true;
+			bEntitled = true;
+			break;
 		}
 	}
-	else
+	return bEntitled;
+}
+
+stock void YerdekiSilahlariSil()
+{
+	int g_WeaponParent = FindSendPropInfo("CBaseCombatWeapon", "m_hOwnerEntity");
+	int maxent = GetMaxEntities();
+	char weapon[64];
+	for (int i = MaxClients; i < maxent; i++)
 	{
-		flags = ReadFlagString(sFlags); iCount = 0; iFound = 0;
-		for (int i = 0; i <= 20; i++)
+		if (IsValidEdict(i) && IsValidEntity(i))
 		{
-			if (flags & (1 << i))
-			{
-				iCount++; if (GetAdminFlag(id, view_as<AdminFlag>(i)))iFound++;
-			}
+			GetEdictClassname(i, weapon, sizeof(weapon));
+			if ((StrContains(weapon, "weapon_") != -1 || StrContains(weapon, "item_") != -1) && GetEntDataEnt2(i, g_WeaponParent) == -1)
+				RemoveEntity(i);
 		}
-		if (iCount == iFound)return true;
-	} return false;
+	}
 } 
