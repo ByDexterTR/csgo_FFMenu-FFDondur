@@ -29,7 +29,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 	{
 		char Item[32];
 		menu.GetItem(param2, Item, sizeof(Item));
-		if (StrEqual(Item, "ffbaslat", true))
+		if (strcmp(Item, "ffbaslat", false) == 0)
 		{
 			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04açılmıştır!", client);
 			if (!FFAktif)
@@ -45,7 +45,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
 				SetCvar("mp_respawn_on_death_t", 0);
 		}
-		else if (StrEqual(Item, "ffkapat", true))
+		else if (strcmp(Item, "ffkapat", false) == 0)
 		{
 			if (g_gerisaytimer != null)
 				delete g_gerisaytimer;
@@ -61,11 +61,11 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 				SetCvar("mp_respawn_on_death_t", 0);
 			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04iptal edilmiştir!", client);
 		}
-		else if (StrEqual(Item, "ben", true))
+		else if (strcmp(Item, "ben", false) == 0)
 		{
 			ReplyToCommand(client, "[SM] \x01Kullanım: sm_ffmenu (Saniye)");
 		}
-		else if (StrEqual(Item, "60sn", true))
+		else if (strcmp(Item, "60sn", false) == 0)
 		{
 			GeriSay = 60;
 			if (g_gerisaytimer != null)
@@ -79,7 +79,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "50sn", true))
+		else if (strcmp(Item, "50sn", false) == 0)
 		{
 			GeriSay = 50;
 			if (g_gerisaytimer != null)
@@ -93,7 +93,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "45sn", true))
+		else if (strcmp(Item, "45sn", false) == 0)
 		{
 			GeriSay = 45;
 			if (g_gerisaytimer != null)
@@ -107,7 +107,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "40sn", true))
+		else if (strcmp(Item, "40sn", false) == 0)
 		{
 			GeriSay = 40;
 			if (g_gerisaytimer != null)
@@ -121,7 +121,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "30sn", true))
+		else if (strcmp(Item, "30sn", false) == 0)
 		{
 			GeriSay = 30;
 			if (g_gerisaytimer != null)
@@ -135,7 +135,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "20sn", true))
+		else if (strcmp(Item, "20sn", false) == 0)
 		{
 			GeriSay = 20;
 			if (g_gerisaytimer != null)
@@ -149,7 +149,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "15sn", true))
+		else if (strcmp(Item, "15sn", false) == 0)
 		{
 			GeriSay = 15;
 			if (g_gerisaytimer != null)
@@ -163,7 +163,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "10sn", true))
+		else if (strcmp(Item, "10sn", false) == 0)
 		{
 			GeriSay = 10;
 			if (g_gerisaytimer != null)
@@ -177,7 +177,7 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "5sn", true))
+		else if (strcmp(Item, "5sn", false) == 0)
 		{
 			GeriSay = 5;
 			if (g_gerisaytimer != null)
@@ -228,7 +228,7 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 	{
 		char Item[32];
 		menu2.GetItem(param2, Item, sizeof(Item));
-		if (StrEqual(Item, "onayla", true))
+		if (strcmp(Item, "onayla", false) == 0)
 		{
 			if (bac)
 			{
@@ -258,9 +258,9 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 			{
 				SetCvar("mp_damage_headshot_only", 0);
 			}
-			if (!Ak47 && !M4a4 && !M4a1 && !Awp && !SSG)
+			if (!Ak47 && !M4a4 && !M4a1 && !Awp && !SSG && !Mag7 && !Sawedoff)
 				sadecetabanca = true;
-			else if (Ak47 || M4a4 || M4a1 || Awp || SSG)
+			else if (Ak47 || M4a4 || M4a1 || Awp || SSG || Mag7 || Sawedoff)
 				sadecetabanca = false;
 			FFAktif = true;
 			Guns = true;
@@ -278,7 +278,7 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 			}
 			g_gerisaytimer = CreateTimer(1.0, GeriSayTimer, _, TIMER_REPEAT);
 		}
-		else if (StrEqual(Item, "kafaayarla", true))
+		else if (strcmp(Item, "kafaayarla", false) == 0)
 		{
 			if (onlyhs)
 				onlyhs = false;
@@ -286,15 +286,15 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 				onlyhs = true;
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "ayarlasilah", true))
+		else if (strcmp(Item, "ayarlasilah", false) == 0)
 		{
 			silahayarlama().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "ayarlatabanca", true))
+		else if (strcmp(Item, "ayarlatabanca", false) == 0)
 		{
 			tabancaayarlama().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "bunnyayarla", true))
+		else if (strcmp(Item, "bunnyayarla", false) == 0)
 		{
 			if (bac)
 				bac = false;
@@ -302,7 +302,7 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 				bac = true;
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(Item, "canlandirmaayarla", true))
+		else if (strcmp(Item, "canlandirmaayarla", false) == 0)
 		{
 			if (revive)
 				revive = false;
@@ -393,7 +393,7 @@ public int MenuB_Callback(Menu menub, MenuAction action, int client, int param2)
 	{
 		char Item[32];
 		menub.GetItem(param2, Item, sizeof(Item));
-		if (StrEqual(Item, "deaglem", true))
+		if (strcmp(Item, "deaglem", false) == 0)
 		{
 			if (!Deagle)
 			{
@@ -404,7 +404,7 @@ public int MenuB_Callback(Menu menub, MenuAction action, int client, int param2)
 				Deagle = false;
 			}
 		}
-		else if (StrEqual(Item, "uspm", true))
+		else if (strcmp(Item, "uspm", false) == 0)
 		{
 			if (!Usp)
 			{
@@ -415,7 +415,7 @@ public int MenuB_Callback(Menu menub, MenuAction action, int client, int param2)
 				Usp = false;
 			}
 		}
-		else if (StrEqual(Item, "glockm", true))
+		else if (strcmp(Item, "glockm", false) == 0)
 		{
 			if (!Glock)
 			{
@@ -426,7 +426,7 @@ public int MenuB_Callback(Menu menub, MenuAction action, int client, int param2)
 				Glock = false;
 			}
 		}
-		else if (StrEqual(Item, "hkpm", true))
+		else if (strcmp(Item, "hkpm", false) == 0)
 		{
 			if (!P2000)
 			{
@@ -437,42 +437,42 @@ public int MenuB_Callback(Menu menub, MenuAction action, int client, int param2)
 				P2000 = false;
 			}
 		}
-		else if (StrEqual(Item, "czm", true))
+		else if (strcmp(Item, "czm", false) == 0)
 		{
 			if (!Cz75)
 				Cz75 = true;
 			else
 				Cz75 = false;
 		}
-		else if (StrEqual(Item, "tecm", true))
+		else if (strcmp(Item, "tecm", false) == 0)
 		{
 			if (!Tec9)
 				Tec9 = true;
 			else
 				Tec9 = false;
 		}
-		else if (StrEqual(Item, "p250m", true))
+		else if (strcmp(Item, "p250m", false) == 0)
 		{
 			if (!P25O)
 				P25O = true;
 			else
 				P25O = false;
 		}
-		else if (StrEqual(Item, "revolverm", true))
+		else if (strcmp(Item, "revolverm", false) == 0)
 		{
 			if (!Revolver)
 				Revolver = true;
 			else
 				Revolver = false;
 		}
-		else if (StrEqual(Item, "fivesevenm", true))
+		else if (strcmp(Item, "fivesevenm", false) == 0)
 		{
 			if (!fiveseven)
 				fiveseven = true;
 			else
 				fiveseven = false;
 		}
-		else if (StrEqual(Item, "marazalim", true))
+		else if (strcmp(Item, "marazalim", false) == 0)
 		{
 			if (!marazali)
 				marazali = true;
@@ -536,6 +536,14 @@ Menu silahayarlama()
 		menua.AddItem("ssgm", "SSG08 [KAPALI]");
 	else
 		menua.AddItem("ssgm", "SSG08 [AÇIK]");
+	if (!Mag7)
+		menua.AddItem("mag7m", "MAG7 [KAPALI]");
+	else
+		menua.AddItem("mag7m", "MAG7 [AÇIK]");
+	if (!Sawedoff)
+		menua.AddItem("sawedoffm", "SAWED-OFF [KAPALI]");
+	else
+		menua.AddItem("sawedoffm", "SAWED-OFF [AÇIK]");
 	menua.ExitBackButton = true;
 	menua.ExitButton = false;
 	return menua;
@@ -547,7 +555,7 @@ public int MenuA_Callback(Menu menua, MenuAction action, int client, int param2)
 	{
 		char Item[32];
 		menua.GetItem(param2, Item, sizeof(Item));
-		if (StrEqual(Item, "ak47m", true))
+		if (strcmp(Item, "ak47m", false) == 0)
 		{
 			if (!Ak47)
 			{
@@ -558,7 +566,7 @@ public int MenuA_Callback(Menu menua, MenuAction action, int client, int param2)
 				Ak47 = false;
 			}
 		}
-		else if (StrEqual(Item, "m4a4m", true))
+		else if (strcmp(Item, "m4a4m", false) == 0)
 		{
 			if (!M4a4)
 			{
@@ -569,7 +577,7 @@ public int MenuA_Callback(Menu menua, MenuAction action, int client, int param2)
 				M4a4 = false;
 			}
 		}
-		else if (StrEqual(Item, "m4a1m", true))
+		else if (strcmp(Item, "m4a1m", false) == 0)
 		{
 			if (!M4a1)
 			{
@@ -580,7 +588,7 @@ public int MenuA_Callback(Menu menua, MenuAction action, int client, int param2)
 				M4a1 = false;
 			}
 		}
-		else if (StrEqual(Item, "augm", true))
+		else if (strcmp(Item, "augm", false) == 0)
 		{
 			if (!Aug)
 			{
@@ -591,7 +599,7 @@ public int MenuA_Callback(Menu menua, MenuAction action, int client, int param2)
 				Aug = false;
 			}
 		}
-		else if (StrEqual(Item, "awpm", true))
+		else if (strcmp(Item, "awpm", false) == 0)
 		{
 			if (!Awp)
 			{
@@ -602,12 +610,26 @@ public int MenuA_Callback(Menu menua, MenuAction action, int client, int param2)
 				Awp = false;
 			}
 		}
-		else if (StrEqual(Item, "ssgm", true))
+		else if (strcmp(Item, "ssgm", false) == 0)
 		{
 			if (!SSG)
 				SSG = true;
 			else
 				SSG = false;
+		}
+		else if (strcmp(Item, "mag7m", false) == 0)
+		{
+			if (!Mag7)
+				Mag7 = true;
+			else
+				Mag7 = false;
+		}
+		else if (strcmp(Item, "sawedoffm", false) == 0)
+		{
+			if (!Sawedoff)
+				Sawedoff = true;
+			else
+				Sawedoff = false;
 		}
 		silahayarlama().Display(client, MENU_TIME_FOREVER);
 	}
@@ -646,6 +668,10 @@ Menu gunsmenu()
 	}
 	if (SSG)
 		menu3.AddItem("ssgver", "SSG08");
+	if (Mag7)
+		menu3.AddItem("mag7ver", "MAG7");
+	if (Sawedoff)
+		menu3.AddItem("sawedoffver", "SAWED-OFF");
 	return menu3;
 }
 
@@ -657,29 +683,37 @@ public int Menu3_Callback(Menu menu3, MenuAction action, int client, int param2)
 		{
 			char Item[32];
 			menu3.GetItem(param2, Item, sizeof(Item));
-			if (StrEqual(Item, "akver", true))
+			if (strcmp(Item, "akver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_ak47");
 			}
-			else if (StrEqual(Item, "a4ver", true))
+			else if (strcmp(Item, "a4ver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_m4a1");
 			}
-			else if (StrEqual(Item, "a1ver", true))
+			else if (strcmp(Item, "a1ver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_m4a1_silencer");
 			}
-			else if (StrEqual(Item, "augver", true))
+			else if (strcmp(Item, "augver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_aug");
 			}
-			else if (StrEqual(Item, "awpver", true))
+			else if (strcmp(Item, "awpver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_awp");
 			}
-			else if (StrEqual(Item, "ssgver", true))
+			else if (strcmp(Item, "ssgver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_ssg08");
+			}
+			else if (strcmp(Item, "mag7ver", false) == 0)
+			{
+				GivePlayerItem(client, "weapon_mag7");
+			}
+			else if (strcmp(Item, "sawedoffver", false) == 0)
+			{
+				GivePlayerItem(client, "weapon_sawedoff");
 			}
 			tabancamenu().Display(client, MENU_TIME_FOREVER);
 		}
@@ -737,43 +771,43 @@ public int Menu4_Callback(Menu menu4, MenuAction action, int client, int param2)
 		{
 			char Item[32];
 			menu4.GetItem(param2, Item, sizeof(Item));
-			if (StrEqual(Item, "dver", true))
+			if (strcmp(Item, "dver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_deagle");
 			}
-			else if (StrEqual(Item, "uver", true))
+			else if (strcmp(Item, "uver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_usp_silencer");
 			}
-			else if (StrEqual(Item, "gver", true))
+			else if (strcmp(Item, "gver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_glock");
 			}
-			else if (StrEqual(Item, "pver", true))
+			else if (strcmp(Item, "pver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_hkp2000");
 			}
-			else if (StrEqual(Item, "czver", true))
+			else if (strcmp(Item, "czver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_cz75a");
 			}
-			else if (StrEqual(Item, "tecver", true))
+			else if (strcmp(Item, "tecver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_tec9");
 			}
-			else if (StrEqual(Item, "p250ver", true))
+			else if (strcmp(Item, "p250ver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_p250");
 			}
-			else if (StrEqual(Item, "revolverver", true))
+			else if (strcmp(Item, "revolverver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_revolver");
 			}
-			else if (StrEqual(Item, "fivesevenver", true))
+			else if (strcmp(Item, "fivesevenver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_fiveseven");
 			}
-			else if (StrEqual(Item, "marazaliver", true))
+			else if (strcmp(Item, "marazaliver", false) == 0)
 			{
 				GivePlayerItem(client, "weapon_elite");
 			}

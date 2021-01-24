@@ -19,37 +19,37 @@ public int MenuDon_Callback(Menu menudon, MenuAction action, int client, int par
 	{
 		char Item[32];
 		menudon.GetItem(param2, Item, sizeof(Item));
-		if (StrEqual(Item, "kendim", true))
+		if (strcmp(Item, "kendim", false) == 0)
 		{
 			ReplyToCommand(client, "[SM] \x01Kullanım: sm_ffdondur (Saniye)");
 		}
 		else
 		{
-			if (StrEqual(Item, "60san", true))
+			if (strcmp(Item, "60san", false) == 0)
 			{
 				DondurmaSure = 60;
 			}
-			else if (StrEqual(Item, "50san", true))
+			else if (strcmp(Item, "50san", false) == 0)
 			{
 				DondurmaSure = 50;
 			}
-			else if (StrEqual(Item, "40san", true))
+			else if (strcmp(Item, "40san", false) == 0)
 			{
 				DondurmaSure = 40;
 			}
-			else if (StrEqual(Item, "30san", true))
+			else if (strcmp(Item, "30san", false) == 0)
 			{
 				DondurmaSure = 30;
 			}
-			else if (StrEqual(Item, "20san", true))
+			else if (strcmp(Item, "20san", false) == 0)
 			{
 				DondurmaSure = 20;
 			}
-			else if (StrEqual(Item, "10san", true))
+			else if (strcmp(Item, "10san", false) == 0)
 			{
 				DondurmaSure = 10;
 			}
-			else if (StrEqual(Item, "5san", true))
+			else if (strcmp(Item, "5san", false) == 0)
 			{
 				DondurmaSure = 5;
 			}
@@ -93,35 +93,35 @@ public int MenuDon2_Callback(Menu menudon2, MenuAction action, int client, int p
 	{
 		char Item[32];
 		menudon2.GetItem(param2, Item, sizeof(Item));
-		if (StrEqual(Item, "esit", true))
+		if (strcmp(Item, "esit", false) == 0)
 		{
 			KapatmaSure = DondurmaSure;
 		}
-		else if (StrEqual(Item, "60sne", true))
+		else if (strcmp(Item, "60sne", false) == 0)
 		{
 			KapatmaSure = 60;
 		}
-		else if (StrEqual(Item, "50sne", true))
+		else if (strcmp(Item, "50sne", false) == 0)
 		{
 			KapatmaSure = 50;
 		}
-		else if (StrEqual(Item, "40sne", true))
+		else if (strcmp(Item, "40sne", false) == 0)
 		{
 			KapatmaSure = 40;
 		}
-		else if (StrEqual(Item, "30sne", true))
+		else if (strcmp(Item, "30sne", false) == 0)
 		{
 			KapatmaSure = 30;
 		}
-		else if (StrEqual(Item, "20sne", true))
+		else if (strcmp(Item, "20sne", false) == 0)
 		{
 			KapatmaSure = 20;
 		}
-		else if (StrEqual(Item, "10sne", true))
+		else if (strcmp(Item, "10sne", false) == 0)
 		{
 			KapatmaSure = 10;
 		}
-		else if (StrEqual(Item, "5sne", true))
+		else if (strcmp(Item, "5sne", false) == 0)
 		{
 			KapatmaSure = 5;
 		}
@@ -138,4 +138,4 @@ public int MenuDon2_Callback(Menu menudon2, MenuAction action, int client, int p
 	{
 		delete menudon2;
 	}
-}
+} 

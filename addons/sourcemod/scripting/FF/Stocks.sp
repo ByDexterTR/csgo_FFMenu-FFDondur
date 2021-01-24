@@ -1,4 +1,4 @@
-stock void SetCvar(char[] cvarName, int value)
+void SetCvar(char[] cvarName, int value)
 {
 	ConVar IntCvar = FindConVar(cvarName);
 	if (IntCvar == null)return;
@@ -28,7 +28,7 @@ public Action HGR_OnClientRope(int client)
 	return Plugin_Continue;
 }
 
-stock bool HasFlags(int client, const char[] flags)
+bool HasFlags(int client, const char[] flags)
 {
 	int iCount = 0;
 	char sflagNeed[22][8], sflagFormat[64];
@@ -47,7 +47,7 @@ stock bool HasFlags(int client, const char[] flags)
 	return bEntitled;
 }
 
-stock void YerdekiSilahlariSil()
+void YerdekiSilahlariSil()
 {
 	int g_WeaponParent = FindSendPropInfo("CBaseCombatWeapon", "m_hOwnerEntity");
 	int maxent = GetMaxEntities();
