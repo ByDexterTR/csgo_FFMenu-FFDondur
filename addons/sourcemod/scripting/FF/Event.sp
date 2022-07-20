@@ -3,12 +3,9 @@ public Action OnClientDead(Event event, const char[] name, bool dontBroadcast)
 	if (FFAktif || DondurmaSure != -1)
 	{
 		int iCount_terrorist = 0;
-		for (int i = 1; i < MaxClients; i++)
+		for (int i = 1; i < MaxClients; i++)if (IsValidClient(i) && IsPlayerAlive(i) && GetClientTeam(i) == 2)
 		{
-			if (IsValidClient(i) && IsPlayerAlive(i) && GetClientTeam(i) == 2)
-			{
-				iCount_terrorist++;
-			}
+			iCount_terrorist++;
 		}
 		if (iCount_terrorist == 1)
 		{
@@ -43,11 +40,9 @@ public Action OnClientSayCommand(int client, const char[] command, const char[] 
 	g_Gidilecekyerbelirten[client] = false;
 	g_gerisaytimerr = CreateTimer(1.0, DondurGeriSay, _, TIMER_REPEAT);
 	for (int i = 1; i <= MaxClients; i++)
+	if (IsValidClient(i))
 	{
-		if (IsClientInGame(i) && !IsFakeClient(i))
-		{
-			SetHudTextParams(-1.0, -0.60, 5.0, 130, 34, 33, 255, 2, 0.1, 0.1, 0.1);
-			ShowSyncHudText(i, ScreenText, "%s", sArgs);
-		}
+		SetHudTextParams(-1.0, -0.60, 5.0, 130, 34, 33, 255, 2, 0.1, 0.1, 0.1);
+		ShowSyncHudText(i, ScreenText, "%s", sArgs);
 	}
 } 

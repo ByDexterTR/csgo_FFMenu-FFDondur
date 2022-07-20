@@ -143,16 +143,13 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 			FFAktif = true;
 			Guns = true;
 			revive = false;
-			for (int i = 1; i <= MaxClients; i++)
+			for (int i = 1; i <= MaxClients; i++)if (IsValidClient(i) && IsPlayerAlive(i) && GetClientTeam(i) == 2)
 			{
-				if (IsValidClient(i) && IsPlayerAlive(i) && GetClientTeam(i) == 2)
-				{
-					GivePlayerItem(i, "weapon_hegrenade");
-					if (!sadecetabanca)
-						gunsmenu().Display(i, MENU_TIME_FOREVER);
-					else
-						tabancamenu().Display(i, MENU_TIME_FOREVER);
-				}
+				GivePlayerItem(i, "weapon_hegrenade");
+				if (!sadecetabanca)
+					gunsmenu().Display(i, MENU_TIME_FOREVER);
+				else
+					tabancamenu().Display(i, MENU_TIME_FOREVER);
 			}
 			g_gerisaytimer = CreateTimer(1.0, GeriSayTimer, _, TIMER_REPEAT);
 		}

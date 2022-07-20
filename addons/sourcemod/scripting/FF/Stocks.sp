@@ -36,13 +36,10 @@ bool HasFlags(int client, const char[] flags)
 	Format(sflagFormat, sizeof(sflagFormat), flags);
 	ReplaceString(sflagFormat, sizeof(sflagFormat), " ", "");
 	iCount = ExplodeString(sflagFormat, ",", sflagNeed, sizeof(sflagNeed), sizeof(sflagNeed[]));
-	for (int i = 0; i < iCount; i++)
+	for (int i = 0; i < iCount; i++)if ((GetUserFlagBits(client) & ReadFlagString(sflagNeed[i])) || (GetUserFlagBits(client) & ADMFLAG_ROOT))
 	{
-		if ((GetUserFlagBits(client) & ReadFlagString(sflagNeed[i])) || (GetUserFlagBits(client) & ADMFLAG_ROOT))
-		{
-			bEntitled = true;
-			break;
-		}
+		bEntitled = true;
+		break;
 	}
 	return bEntitled;
 }
@@ -52,16 +49,13 @@ void YerdekiSilahlariSil()
 	int g_WeaponParent = FindSendPropInfo("CBaseCombatWeapon", "m_hOwnerEntity");
 	int maxent = GetMaxEntities();
 	char weapon[64];
-	for (int i = MaxClients; i < maxent; i++)
+	for (int i = MaxClients; i < maxent; i++)if (IsValidEdict(i) && IsValidEntity(i))
 	{
-		if (IsValidEdict(i) && IsValidEntity(i))
-		{
-			GetEdictClassname(i, weapon, sizeof(weapon));
-			if ((StrContains(weapon, "weapon_") != -1 || StrContains(weapon, "item_") != -1) && GetEntDataEnt2(i, g_WeaponParent) == -1)
-				RemoveEdict(i);
-		}
+		GetEntityClassname(i, weapon, sizeof(weapon));
+		if ((StrContains(weapon, "weapon_") != -1 || StrContains(weapon, "item_") != -1) && GetEntDataEnt2(i, g_WeaponParent) == -1)
+			RemoveEntity(i);
 	}
-} 
+}
 
 bool IsValidClient(int client, bool nobots = true)
 {
@@ -70,4 +64,4 @@ bool IsValidClient(int client, bool nobots = true)
 		return false;
 	}
 	return IsClientInGame(client);
-}
+} 

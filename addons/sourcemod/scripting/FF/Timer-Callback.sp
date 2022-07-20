@@ -33,14 +33,11 @@ public Action DondurGeriSay(Handle timer, any data)
 		SetCvar("mp_teammates_are_enemies", 0);
 		SetCvar("mp_friendlyfire", 0);
 		ServerCommand("sm_freeze @t -1");
-		for (int i = 1; i <= MaxClients; i++)
+		for (int i = 1; i <= MaxClients; i++)if (IsValidClient(i))
 		{
-			if (IsValidClient(i))
-			{
-				PrintHintText(i, "<font color='#00bbff'>Freeze Atıldı</font>\n<font color='#ffbb00'>FF Kapatıldı</font>", DondurmaSure, KapatmaSure);
-				SetHudTextParams(-1.0, -0.35, 3.0, 0, 255, 0, 0, 2, 1.0, 0.01, 0.01);
-				ShowSyncHudText(i, ScreenText, "Oyuncular Donduruldu!");
-			}
+			PrintHintText(i, "<font color='#00bbff'>Freeze Atıldı</font>\n<font color='#ffbb00'>FF Kapatıldı</font>", DondurmaSure, KapatmaSure);
+			SetHudTextParams(-1.0, -0.35, 3.0, 0, 255, 0, 0, 2, 1.0, 0.01, 0.01);
+			ShowSyncHudText(i, ScreenText, "Oyuncular Donduruldu!");
 		}
 		g_gerisaytimerr = null;
 		return Plugin_Stop;
