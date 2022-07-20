@@ -4,48 +4,42 @@ public Action DondurGeriSay(Handle timer, any data)
 	{
 		if (KapatmaSure > -1)
 		{
-			for (int i = 1; i <= MaxClients; i++)
-			if (IsClientInGame(i) && !IsFakeClient(i))
-				PrintHintText(i, "Freeze Süresi: %d\nFF Kapatma Süresi: %d\nBölge: %s", DondurmaSure, KapatmaSure, GidilecekYer);
+			for (int i = 1; i <= MaxClients; i++)if (IsValidClient(i))
+			{
+				PrintHintText(i, "Freeze Süresi: <font color='#00bbff'>%d</font>\nFF Kapatma Süresi: <font color='#ffbb00'>%d</font>\nBölge: <font color='#ff0000'>%s</font>", DondurmaSure, KapatmaSure, GidilecekYer);
+			}
 			KapatmaSure--;
 		}
-		if (KapatmaSure <= -1)
+		else
 		{
-			if (Guns)
-				Guns = false;
-			if (FFAktif)
-				FFAktif = false;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
+			Guns = false;
+			FFAktif = false;
+			if (FindConVar("mp_teammates_are_enemies").IntValue != 0)
 			{
 				SetCvar("mp_teammates_are_enemies", 0);
 				SetCvar("mp_friendlyfire", 0);
-				if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-					SetCvar("mp_respawn_on_death_t", 0);
+				SetCvar("mp_respawn_on_death_t", 0);
 				PrintToChatAll("[SM] \x01Dost ateşi \x04kapatılmıştır!");
 			}
-			for (int i = 1; i <= MaxClients; i++)
-			if (IsClientInGame(i) && !IsFakeClient(i))
-				PrintHintText(i, "Freeze Süresi: %d\nFF Kapatıldı!\nBölge: %s", DondurmaSure, GidilecekYer);
+			for (int i = 1; i <= MaxClients; i++)if (IsValidClient(i))
+			{
+				PrintHintText(i, "Freeze Süresi: <font color='#00bbff'>%d</font>\n<font color='#ffbb00'>FF Kapatıldı</font>\nBölge: <font color='#ff0000'>%s</font>", DondurmaSure, GidilecekYer);
+			}
 		}
 		DondurmaSure--;
 	}
-	if (DondurmaSure <= -1)
+	else
 	{
-		if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) == 1 || GetConVarInt(FindConVar("mp_friendlyfire")) == 1)
-		{
-			SetCvar("mp_teammates_are_enemies", 0);
-			SetCvar("mp_friendlyfire", 0);
-		}
+		SetCvar("mp_teammates_are_enemies", 0);
+		SetCvar("mp_friendlyfire", 0);
 		ServerCommand("sm_freeze @t -1");
 		for (int i = 1; i <= MaxClients; i++)
 		{
-			if (IsClientInGame(i) && !IsFakeClient(i))
+			if (IsValidClient(i))
 			{
-				PrintHintText(i, "Freeze Atıldı\nFF Kapatıldı!", DondurmaSure, KapatmaSure);
-				Handle ScreenText = CreateHudSynchronizer();
+				PrintHintText(i, "<font color='#00bbff'>Freeze Atıldı</font>\n<font color='#ffbb00'>FF Kapatıldı</font>", DondurmaSure, KapatmaSure);
 				SetHudTextParams(-1.0, -0.35, 3.0, 0, 255, 0, 0, 2, 1.0, 0.01, 0.01);
 				ShowSyncHudText(i, ScreenText, "Oyuncular Donduruldu!");
-				delete ScreenText;
 			}
 		}
 		g_gerisaytimerr = null;
@@ -61,25 +55,21 @@ public Action GeriSayTimer(Handle timer, any data)
 	if (GeriSay > -1)
 	{
 		YerdekiSilahlariSil();
-		for (int i = 1; i <= MaxClients; i++)
+		for (int i = 1; i <= MaxClients; i++)if (IsValidClient(i))
 		{
-			if (IsClientInGame(i) && !IsFakeClient(i))
-			{
-				PrintHintText(i, "<font color='#00FF00'>%d Saniye</font> sonra dost ateşi başlayacak", GeriSay);
-			}
+			PrintHintText(i, "<font color='#ffbb00'>%d Saniye</font> sonra dost ateşi başlayacak", GeriSay);
 		}
 		GeriSay--;
 		return Plugin_Continue;
 	}
-	if (GeriSay <= -1)
+	else
 	{
 		Guns = false;
-		if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 1)SetCvar("mp_teammates_are_enemies", 1);
-		if (GetConVarInt(FindConVar("mp_friendlyfire")) != 1)SetCvar("mp_friendlyfire", 1);
-		if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)SetCvar("mp_respawn_on_death_t", 0);
+		SetCvar("mp_teammates_are_enemies", 1);
+		SetCvar("mp_friendlyfire", 1);
+		SetCvar("mp_respawn_on_death_t", 0);
 		PrintToChatAll("[SM] \x01Dost ateşi \x04açıldı!");
 		if (g_gerisaytimer != null)g_gerisaytimer = null;
 		return Plugin_Stop;
 	}
-	return Plugin_Continue;
 } 

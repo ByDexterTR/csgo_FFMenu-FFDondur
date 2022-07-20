@@ -10,16 +10,16 @@ Menu menugoster()
 	{
 		menu.AddItem("ffkapat", "Dost Ateşi Kapat");
 	}
-	menu.AddItem("ben", "Kendim belirleyeceğim");
-	menu.AddItem("60sn", "60 Saniye Sonra");
-	menu.AddItem("50sn", "50 Saniye Sonra");
-	menu.AddItem("45sn", "45 Saniye Sonra");
-	menu.AddItem("40sn", "40 Saniye Sonra");
-	menu.AddItem("30sn", "30 Saniye Sonra");
-	menu.AddItem("20sn", "20 Saniye Sonra");
-	menu.AddItem("15sn", "15 Saniye Sonra");
-	menu.AddItem("10sn", "10 Saniye Sonra");
-	menu.AddItem("5sn", "5 Saniye Sonra");
+	menu.AddItem("31", "Kendim belirleyeceğim");
+	menu.AddItem("60", "60 Saniye Sonra");
+	menu.AddItem("50", "50 Saniye Sonra");
+	menu.AddItem("45", "45 Saniye Sonra");
+	menu.AddItem("40", "40 Saniye Sonra");
+	menu.AddItem("30", "30 Saniye Sonra");
+	menu.AddItem("20", "20 Saniye Sonra");
+	menu.AddItem("15", "15 Saniye Sonra");
+	menu.AddItem("10", "10 Saniye Sonra");
+	menu.AddItem("5", "5 Saniye Sonra");
 	return menu;
 }
 
@@ -27,167 +27,45 @@ public int Menu_Callback(Menu menu, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
-		char Item[32];
-		menu.GetItem(param2, Item, sizeof(Item));
+		char Item[12];
+		menu.GetItem(param2, Item, 12);
 		if (strcmp(Item, "ffbaslat", false) == 0)
 		{
-			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04açılmıştır!", client);
-			if (!FFAktif)
-				FFAktif = true;
 			if (g_gerisaytimer != null)
 				delete g_gerisaytimer;
-			if (Guns)
-				Guns = false;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 1)
-				SetCvar("mp_teammates_are_enemies", 1);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 1)
-				SetCvar("mp_friendlyfire", 1);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
+			
+			FFAktif = true;
+			Guns = false;
+			SetCvar("mp_teammates_are_enemies", 1);
+			SetCvar("mp_friendlyfire", 1);
+			SetCvar("mp_respawn_on_death_t", 0);
+			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04açılmıştır!", client);
 		}
 		else if (strcmp(Item, "ffkapat", false) == 0)
 		{
 			if (g_gerisaytimer != null)
 				delete g_gerisaytimer;
-			if (Guns)
-				Guns = false;
-			if (FFAktif)
-				FFAktif = false;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
-				SetCvar("mp_teammates_are_enemies", 0);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)
-				SetCvar("mp_friendlyfire", 0);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
+			
+			Guns = false;
+			FFAktif = false;
+			SetCvar("mp_teammates_are_enemies", 0);
+			SetCvar("mp_friendlyfire", 0);
+			SetCvar("mp_respawn_on_death_t", 0);
 			PrintToChatAll("[SM] \x0C%N \x01tarafından Dost ateşi \x04iptal edilmiştir!", client);
 		}
-		else if (strcmp(Item, "ben", false) == 0)
+		else if (StringToInt(Item) == 31)
 		{
 			ReplyToCommand(client, "[SM] \x01Kullanım: sm_ffmenu (Saniye)");
 		}
-		else if (strcmp(Item, "60sn", false) == 0)
+		else
 		{
-			GeriSay = 60;
+			GeriSay = StringToInt(Item);
 			if (g_gerisaytimer != null)
 				delete g_gerisaytimer;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
-				SetCvar("mp_teammates_are_enemies", 0);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)
-				SetCvar("mp_friendlyfire", 0);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
-			yasaklisilah().Display(client, MENU_TIME_FOREVER);
-		}
-		else if (strcmp(Item, "50sn", false) == 0)
-		{
-			GeriSay = 50;
-			if (g_gerisaytimer != null)
-				delete g_gerisaytimer;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
-				SetCvar("mp_teammates_are_enemies", 0);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)
-				SetCvar("mp_friendlyfire", 0);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
-			yasaklisilah().Display(client, MENU_TIME_FOREVER);
-		}
-		else if (strcmp(Item, "45sn", false) == 0)
-		{
-			GeriSay = 45;
-			if (g_gerisaytimer != null)
-				delete g_gerisaytimer;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
-				SetCvar("mp_teammates_are_enemies", 0);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)
-				SetCvar("mp_friendlyfire", 0);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
-			yasaklisilah().Display(client, MENU_TIME_FOREVER);
-		}
-		else if (strcmp(Item, "40sn", false) == 0)
-		{
-			GeriSay = 40;
-			if (g_gerisaytimer != null)
-				delete g_gerisaytimer;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
-				SetCvar("mp_teammates_are_enemies", 0);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)
-				SetCvar("mp_friendlyfire", 0);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
-			yasaklisilah().Display(client, MENU_TIME_FOREVER);
-		}
-		else if (strcmp(Item, "30sn", false) == 0)
-		{
-			GeriSay = 30;
-			if (g_gerisaytimer != null)
-				delete g_gerisaytimer;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
-				SetCvar("mp_teammates_are_enemies", 0);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)
-				SetCvar("mp_friendlyfire", 0);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
-			yasaklisilah().Display(client, MENU_TIME_FOREVER);
-		}
-		else if (strcmp(Item, "20sn", false) == 0)
-		{
-			GeriSay = 20;
-			if (g_gerisaytimer != null)
-				delete g_gerisaytimer;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
-				SetCvar("mp_teammates_are_enemies", 0);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)
-				SetCvar("mp_friendlyfire", 0);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
-			yasaklisilah().Display(client, MENU_TIME_FOREVER);
-		}
-		else if (strcmp(Item, "15sn", false) == 0)
-		{
-			GeriSay = 15;
-			if (g_gerisaytimer != null)
-				delete g_gerisaytimer;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
-				SetCvar("mp_teammates_are_enemies", 0);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)
-				SetCvar("mp_friendlyfire", 0);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
-			yasaklisilah().Display(client, MENU_TIME_FOREVER);
-		}
-		else if (strcmp(Item, "10sn", false) == 0)
-		{
-			GeriSay = 10;
-			if (g_gerisaytimer != null)
-				delete g_gerisaytimer;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
-				SetCvar("mp_teammates_are_enemies", 0);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)
-				SetCvar("mp_friendlyfire", 0);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
-			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
-			yasaklisilah().Display(client, MENU_TIME_FOREVER);
-		}
-		else if (strcmp(Item, "5sn", false) == 0)
-		{
-			GeriSay = 5;
-			if (g_gerisaytimer != null)
-				delete g_gerisaytimer;
-			if (GetConVarInt(FindConVar("mp_teammates_are_enemies")) != 0)
-				SetCvar("mp_teammates_are_enemies", 0);
-			if (GetConVarInt(FindConVar("mp_friendlyfire")) != 0)
-				SetCvar("mp_friendlyfire", 0);
-			if (GetConVarInt(FindConVar("mp_respawn_on_death_t")) != 0)
-				SetCvar("mp_respawn_on_death_t", 0);
+			
+			SetCvar("mp_teammates_are_enemies", 0);
+			SetCvar("mp_friendlyfire", 0);
+			SetCvar("mp_respawn_on_death_t", 0);
 			PrintToChatAll("[SM] \x0C%N \x01tarafından \x04FF Süresi %d saniye \x01belirlenmiştir!", client, GeriSay);
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
@@ -202,23 +80,21 @@ Menu yasaklisilah()
 {
 	Menu menu2 = new Menu(Menu2_Callback);
 	menu2.SetTitle("^-^ FF Menu - Ayarlar");
-	menu2.AddItem("onayla", "Ayarları Onayla");
-	menu2.AddItem("ayarlasilah", "Yasaklı Ana Silahar");
-	menu2.AddItem("ayarlatabanca", "Yasaklı Tabanacalar");
+	menu2.AddItem("0", "Ayarları Onayla");
+	menu2.AddItem("1", "Yasaklı Ana Silahar");
+	menu2.AddItem("2", "Yasaklı Tabanacalar");
 	if (bac)
-		menu2.AddItem("bunnyayarla", "Bunny: [KAPALI]");
+		menu2.AddItem("3", "Bunny: [KAPALI]");
 	else
-		menu2.AddItem("bunnyayarla", "Bunny: [AÇIK]");
+		menu2.AddItem("3", "Bunny: [AÇIK]");
 	if (revive)
-		menu2.AddItem("canlandirmaayarla", "Oto Respawn: [AÇIK]");
+		menu2.AddItem("4", "Oto Respawn: [AÇIK]");
 	else
-		menu2.AddItem("canlandirmaayarla", "Oto Respawn: [KAPALI]");
+		menu2.AddItem("4", "Oto Respawn: [KAPALI]");
 	if (onlyhs)
-		menu2.AddItem("kafaayarla", "Sadece HS: [AÇIK]");
+		menu2.AddItem("5", "Sadece HS: [AÇIK]");
 	else
-		menu2.AddItem("kafaayarla", "Sadece HS: [KAPALI]");
-	menu2.ExitBackButton = true;
-	menu2.ExitButton = false;
+		menu2.AddItem("5", "Sadece HS: [KAPALI]");
 	return menu2;
 }
 
@@ -226,9 +102,9 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
-		char Item[32];
-		menu2.GetItem(param2, Item, sizeof(Item));
-		if (strcmp(Item, "onayla", false) == 0)
+		char Item[4];
+		menu2.GetItem(param2, Item, 4);
+		if (StringToInt(Item) == 0)
 		{
 			if (bac)
 			{
@@ -258,16 +134,18 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 			{
 				SetCvar("mp_damage_headshot_only", 0);
 			}
+			
 			if (!Ak47 && !M4a4 && !M4a1 && !Awp && !SSG && !Mag7 && !Sawedoff)
 				sadecetabanca = true;
-			else if (Ak47 || M4a4 || M4a1 || Awp || SSG || Mag7 || Sawedoff)
+			else
 				sadecetabanca = false;
+			
 			FFAktif = true;
 			Guns = true;
 			revive = false;
 			for (int i = 1; i <= MaxClients; i++)
 			{
-				if (IsClientInGame(i) && !IsFakeClient(i) && IsPlayerAlive(i) && GetClientTeam(i) == CS_TEAM_T)
+				if (IsValidClient(i) && IsPlayerAlive(i) && GetClientTeam(i) == 2)
 				{
 					GivePlayerItem(i, "weapon_hegrenade");
 					if (!sadecetabanca)
@@ -278,36 +156,27 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 			}
 			g_gerisaytimer = CreateTimer(1.0, GeriSayTimer, _, TIMER_REPEAT);
 		}
-		else if (strcmp(Item, "kafaayarla", false) == 0)
+		else if (StringToInt(Item) == 5)
 		{
-			if (onlyhs)
-				onlyhs = false;
-			else
-				onlyhs = true;
+			onlyhs = !onlyhs;
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (strcmp(Item, "ayarlasilah", false) == 0)
+		else if (StringToInt(Item) == 1)
 		{
 			silahayarlama().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (strcmp(Item, "ayarlatabanca", false) == 0)
+		else if (StringToInt(Item) == 2)
 		{
 			tabancaayarlama().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (strcmp(Item, "bunnyayarla", false) == 0)
+		else if (StringToInt(Item) == 3)
 		{
-			if (bac)
-				bac = false;
-			else
-				bac = true;
+			bac = !bac;
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
-		else if (strcmp(Item, "canlandirmaayarla", false) == 0)
+		else if (StringToInt(Item) == 4)
 		{
-			if (revive)
-				revive = false;
-			else
-				revive = true;
+			revive = !revive;
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 		}
 	}
@@ -317,7 +186,7 @@ public int Menu2_Callback(Menu menu2, MenuAction action, int client, int param2)
 	}
 	else if (action == MenuAction_Cancel)
 	{
-		if (param2 == MenuCancel_ExitBack)
+		if (param2 == MenuCancel_Exit)
 			menugoster().Display(client, MENU_TIME_FOREVER);
 	}
 }
@@ -327,63 +196,55 @@ Menu tabancaayarlama()
 	Menu menub = new Menu(MenuB_Callback);
 	menub.SetTitle("^-^ FF Menu - Yasaklı Tabancalar");
 	if (!Deagle)
-	{
-		menub.AddItem("deaglem", "DEAGLE [KAPALI]");
-	}
+		menub.AddItem("0", "DEAGLE [KAPALI]");
 	else
-	{
-		menub.AddItem("deaglem", "DEAGLE [AÇIK]");
-	}
+		menub.AddItem("0", "DEAGLE [AÇIK]");
+	
 	if (!Usp)
-	{
-		menub.AddItem("uspm", "USP-S [KAPALI]");
-	}
+		menub.AddItem("1", "USP-S [KAPALI]");
 	else
-	{
-		menub.AddItem("uspm", "USP-S [AÇIK]");
-	}
+		menub.AddItem("1", "USP-S [AÇIK]");
+	
 	if (!Glock)
-	{
-		menub.AddItem("glockm", "GLOCK [KAPALI]");
-	}
+		menub.AddItem("2", "GLOCK [KAPALI]");
 	else
-	{
-		menub.AddItem("glockm", "GLOCK [AÇIK]");
-	}
+		menub.AddItem("2", "GLOCK [AÇIK]");
+	
 	if (!P2000)
-	{
-		menub.AddItem("hkpm", "P2000 [KAPALI]");
-	}
+		menub.AddItem("3", "P2000 [KAPALI]");
 	else
-	{
-		menub.AddItem("hkpm", "P2000 [AÇIK]");
-	}
+		menub.AddItem("3", "P2000 [AÇIK]");
+	
 	if (!Cz75)
-		menub.AddItem("czm", "CZ75 [KAPALI]");
+		menub.AddItem("4", "CZ75 [KAPALI]");
 	else
-		menub.AddItem("czm", "CZ75 [AÇIK]");
+		menub.AddItem("4", "CZ75 [AÇIK]");
+	
 	if (!Tec9)
-		menub.AddItem("tecm", "TEC9 [KAPALI]");
+		menub.AddItem("5", "TEC9 [KAPALI]");
 	else
-		menub.AddItem("tecm", "TEC9 [AÇIK]");
+		menub.AddItem("5", "TEC9 [AÇIK]");
+	
 	if (!P25O)
-		menub.AddItem("p250m", "P250 [KAPALI]");
+		menub.AddItem("6", "P250 [KAPALI]");
 	else
-		menub.AddItem("p250m", "P250 [AÇIK]");
+		menub.AddItem("6", "P250 [AÇIK]");
+	
 	if (!Revolver)
-		menub.AddItem("revolverm", "REVOLVER [KAPALI]");
+		menub.AddItem("7", "REVOLVER [KAPALI]");
 	else
-		menub.AddItem("revolverm", "REVOLVER [AÇIK]");
+		menub.AddItem("7", "REVOLVER [AÇIK]");
+	
 	if (!fiveseven)
-		menub.AddItem("fivesevenm", "FIVESEVEN [KAPALI]");
+		
+	menub.AddItem("8", "FIVESEVEN [KAPALI]");
 	else
-		menub.AddItem("fivesevenm", "FIVESEVEN [AÇIK]");
+		menub.AddItem("8", "FIVESEVEN [AÇIK]");
+	
 	if (!marazali)
-		menub.AddItem("marazalim", "ÇİFT BERETTA [KAPALI]");
+		menub.AddItem("9", "ÇİFT BERETTA [KAPALI]");
 	else
-		menub.AddItem("marazalim", "ÇİFT BERETTA [AÇIK]");
-	menub.ExitBackButton = true;
-	menub.ExitButton = false;
+		menub.AddItem("9", "ÇİFT BERETTA [AÇIK]");
 	return menub;
 }
 
@@ -391,93 +252,48 @@ public int MenuB_Callback(Menu menub, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
-		char Item[32];
-		menub.GetItem(param2, Item, sizeof(Item));
-		if (strcmp(Item, "deaglem", false) == 0)
+		char Item[4];
+		menub.GetItem(param2, Item, 4);
+		int item = StringToInt(Item);
+		if (item == 0)
 		{
-			if (!Deagle)
-			{
-				Deagle = true;
-			}
-			else
-			{
-				Deagle = false;
-			}
+			Deagle = !Deagle;
 		}
-		else if (strcmp(Item, "uspm", false) == 0)
+		else if (item == 1)
 		{
-			if (!Usp)
-			{
-				Usp = true;
-			}
-			else
-			{
-				Usp = false;
-			}
+			Usp = !Usp;
 		}
-		else if (strcmp(Item, "glockm", false) == 0)
+		else if (item == 2)
 		{
-			if (!Glock)
-			{
-				Glock = true;
-			}
-			else
-			{
-				Glock = false;
-			}
+			Glock = !Glock;
 		}
-		else if (strcmp(Item, "hkpm", false) == 0)
+		else if (item == 3)
 		{
-			if (!P2000)
-			{
-				P2000 = true;
-			}
-			else
-			{
-				P2000 = false;
-			}
+			P2000 = !P2000;
 		}
-		else if (strcmp(Item, "czm", false) == 0)
+		else if (item == 4)
 		{
-			if (!Cz75)
-				Cz75 = true;
-			else
-				Cz75 = false;
+			Cz75 = !Cz75;
 		}
-		else if (strcmp(Item, "tecm", false) == 0)
+		else if (item == 5)
 		{
-			if (!Tec9)
-				Tec9 = true;
-			else
-				Tec9 = false;
+			Tec9 = !Tec9;
 		}
-		else if (strcmp(Item, "p250m", false) == 0)
+		else if (item == 6)
 		{
-			if (!P25O)
-				P25O = true;
-			else
-				P25O = false;
+			P25O = !P25O;
 		}
-		else if (strcmp(Item, "revolverm", false) == 0)
+		else if (item == 7)
 		{
-			if (!Revolver)
-				Revolver = true;
-			else
-				Revolver = false;
+			Revolver = !Revolver;
 		}
-		else if (strcmp(Item, "fivesevenm", false) == 0)
+		else if (item == 8)
 		{
-			if (!fiveseven)
-				fiveseven = true;
-			else
-				fiveseven = false;
+			fiveseven = !fiveseven;
 		}
-		else if (strcmp(Item, "marazalim", false) == 0)
+		else if (item == 9)
 		{
-			if (!marazali)
-				marazali = true;
-			else
-				marazali = false;
+			marazali = !marazali;
 		}
 		tabancaayarlama().Display(client, MENU_TIME_FOREVER);
 	}
@@ -487,7 +303,7 @@ public int MenuB_Callback(Menu menub, MenuAction action, int client, int param2)
 	}
 	else if (action == MenuAction_Cancel)
 	{
-		if (param2 == MenuCancel_ExitBack)
+		if (param2 == MenuCancel_Exit)
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 	}
 }
@@ -497,55 +313,44 @@ Menu silahayarlama()
 	Menu menua = new Menu(MenuA_Callback);
 	menua.SetTitle("^-^ FF Menu - Yasaklı Ana Silahlar");
 	if (!Ak47)
-	{
-		menua.AddItem("ak47m", "AK47 [KAPALI]");
-	}
+		menua.AddItem("0", "AK47 [KAPALI]");
 	else
-	{
-		menua.AddItem("ak47m", "AK47 [AÇIK]");
-	}
+		menua.AddItem("0", "AK47 [AÇIK]");
+	
 	if (!M4a4)
-	{
-		menua.AddItem("m4a4m", "M4A4 [KAPALI]");
-	}
+		menua.AddItem("1", "M4A4 [KAPALI]");
 	else
-	{
-		menua.AddItem("m4a4m", "M4A4 [AÇIK]");
-	}
+		menua.AddItem("1", "M4A4 [AÇIK]");
+	
 	if (!M4a1)
-	{
-		menua.AddItem("m4a1m", "M4A1-S [KAPALI]");
-	}
+		menua.AddItem("2", "M4A1-S [KAPALI]");
 	else
-	{
-		menua.AddItem("m4a1m", "M4A1-S [AÇIK]");
-	}
+		menua.AddItem("2", "M4A1-S [AÇIK]");
+	
 	if (!Aug)
-		menua.AddItem("augm", "AUG [KAPALI]");
+		menua.AddItem("3", "AUG [KAPALI]");
 	else
-		menua.AddItem("augm", "AUG [AÇIK]");
+		menua.AddItem("3", "AUG [AÇIK]");
+	
 	if (!Awp)
-	{
-		menua.AddItem("awpm", "AWP [KAPALI]");
-	}
+		menua.AddItem("4", "AWP [KAPALI]");
 	else
-	{
-		menua.AddItem("awpm", "AWP [AÇIK]");
-	}
+		menua.AddItem("4", "AWP [AÇIK]");
+	
 	if (!SSG)
-		menua.AddItem("ssgm", "SSG08 [KAPALI]");
+		menua.AddItem("5", "SSG08 [KAPALI]");
 	else
-		menua.AddItem("ssgm", "SSG08 [AÇIK]");
+		menua.AddItem("5", "SSG08 [AÇIK]");
+	
 	if (!Mag7)
-		menua.AddItem("mag7m", "MAG7 [KAPALI]");
+		menua.AddItem("6", "MAG7 [KAPALI]");
 	else
-		menua.AddItem("mag7m", "MAG7 [AÇIK]");
+		menua.AddItem("6", "MAG7 [AÇIK]");
+	
 	if (!Sawedoff)
-		menua.AddItem("sawedoffm", "SAWED-OFF [KAPALI]");
+		menua.AddItem("7", "SAWED-OFF [KAPALI]");
 	else
-		menua.AddItem("sawedoffm", "SAWED-OFF [AÇIK]");
-	menua.ExitBackButton = true;
-	menua.ExitButton = false;
+		menua.AddItem("7", "SAWED-OFF [AÇIK]");
 	return menua;
 }
 
@@ -553,83 +358,40 @@ public int MenuA_Callback(Menu menua, MenuAction action, int client, int param2)
 {
 	if (action == MenuAction_Select)
 	{
-		char Item[32];
-		menua.GetItem(param2, Item, sizeof(Item));
-		if (strcmp(Item, "ak47m", false) == 0)
+		char Item[4];
+		menua.GetItem(param2, Item, 4);
+		int item = StringToInt(Item);
+		if (item == 0)
 		{
-			if (!Ak47)
-			{
-				Ak47 = true;
-			}
-			else
-			{
-				Ak47 = false;
-			}
+			Ak47 = !Ak47;
 		}
-		else if (strcmp(Item, "m4a4m", false) == 0)
+		else if (item == 1)
 		{
-			if (!M4a4)
-			{
-				M4a4 = true;
-			}
-			else
-			{
-				M4a4 = false;
-			}
+			M4a4 = !M4a4;
 		}
-		else if (strcmp(Item, "m4a1m", false) == 0)
+		else if (item == 2)
 		{
-			if (!M4a1)
-			{
-				M4a1 = true;
-			}
-			else
-			{
-				M4a1 = false;
-			}
+			M4a1 = !M4a1;
 		}
-		else if (strcmp(Item, "augm", false) == 0)
+		else if (item == 3)
 		{
-			if (!Aug)
-			{
-				Aug = true;
-			}
-			else
-			{
-				Aug = false;
-			}
+			Aug = !Aug;
 		}
-		else if (strcmp(Item, "awpm", false) == 0)
+		else if (item == 4)
 		{
-			if (!Awp)
-			{
-				Awp = true;
-			}
-			else
-			{
-				Awp = false;
-			}
+			Awp = !Awp;
 		}
-		else if (strcmp(Item, "ssgm", false) == 0)
+		else if (item == 5)
 		{
-			if (!SSG)
-				SSG = true;
-			else
-				SSG = false;
+			SSG = !SSG;
 		}
-		else if (strcmp(Item, "mag7m", false) == 0)
+		else if (item == 6)
 		{
-			if (!Mag7)
-				Mag7 = true;
-			else
-				Mag7 = false;
+			Mag7 = !Mag7;
 		}
-		else if (strcmp(Item, "sawedoffm", false) == 0)
+		else if (item == 7)
 		{
-			if (!Sawedoff)
-				Sawedoff = true;
-			else
-				Sawedoff = false;
+			Sawedoff = !Sawedoff;
 		}
 		silahayarlama().Display(client, MENU_TIME_FOREVER);
 	}
@@ -639,7 +401,7 @@ public int MenuA_Callback(Menu menua, MenuAction action, int client, int param2)
 	}
 	else if (action == MenuAction_Cancel)
 	{
-		if (param2 == MenuCancel_ExitBack)
+		if (param2 == MenuCancel_Exit)
 			yasaklisilah().Display(client, MENU_TIME_FOREVER);
 	}
 }
@@ -649,29 +411,29 @@ Menu gunsmenu()
 	Menu menu3 = new Menu(Menu3_Callback);
 	menu3.SetTitle("^-^ FF Menu - Silah Menü\n ");
 	if (Ak47)
-	{
-		menu3.AddItem("akver", "AK47");
-	}
+		menu3.AddItem("weapon_ak47", "AK47");
+	
 	if (M4a4)
-	{
-		menu3.AddItem("a4ver", "M4A4");
-	}
+		menu3.AddItem("weapon_m4a1", "M4A4");
+	
 	if (M4a1)
-	{
-		menu3.AddItem("a1ver", "M4A1-S");
-	}
+		menu3.AddItem("weapon_m4a1_silencer", "M4A1-S");
+	
 	if (Aug)
-		menu3.AddItem("augver", "AUG");
+		menu3.AddItem("weapon_aug", "AUG");
+	
 	if (Awp)
-	{
-		menu3.AddItem("awpver", "AWP");
-	}
+		menu3.AddItem("weapon_awp", "AWP");
+	
 	if (SSG)
-		menu3.AddItem("ssgver", "SSG08");
+		menu3.AddItem("weapon_ssg08", "SSG08");
+	
 	if (Mag7)
-		menu3.AddItem("mag7ver", "MAG7");
+		menu3.AddItem("weapon_mag7", "MAG7");
+	
 	if (Sawedoff)
-		menu3.AddItem("sawedoffver", "SAWED-OFF");
+		menu3.AddItem("weapon_sawedoff", "SAWED-OFF");
+	
 	return menu3;
 }
 
@@ -683,38 +445,7 @@ public int Menu3_Callback(Menu menu3, MenuAction action, int client, int param2)
 		{
 			char Item[32];
 			menu3.GetItem(param2, Item, sizeof(Item));
-			if (strcmp(Item, "akver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_ak47");
-			}
-			else if (strcmp(Item, "a4ver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_m4a1");
-			}
-			else if (strcmp(Item, "a1ver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_m4a1_silencer");
-			}
-			else if (strcmp(Item, "augver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_aug");
-			}
-			else if (strcmp(Item, "awpver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_awp");
-			}
-			else if (strcmp(Item, "ssgver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_ssg08");
-			}
-			else if (strcmp(Item, "mag7ver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_mag7");
-			}
-			else if (strcmp(Item, "sawedoffver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_sawedoff");
-			}
+			GivePlayerItem(client, Item);
 			tabancamenu().Display(client, MENU_TIME_FOREVER);
 		}
 		else
@@ -734,32 +465,32 @@ Menu tabancamenu()
 	menu4.SetTitle("^-^ FF Menu - Tabanca Menü\n ");
 	if (Deagle)
 	{
-		menu4.AddItem("dver", "DEAGLE");
+		menu4.AddItem("weapon_deagle", "DEAGLE");
 	}
 	if (Usp)
 	{
-		menu4.AddItem("uver", "USP-S");
+		menu4.AddItem("weapon_usp_silencer", "USP-S");
 	}
 	if (Glock)
 	{
-		menu4.AddItem("gver", "GLOCK");
+		menu4.AddItem("weapon_glock", "GLOCK");
 	}
 	if (P2000)
 	{
-		menu4.AddItem("pver", "P2000");
+		menu4.AddItem("weapon_hkp2000", "P2000");
 	}
 	if (Cz75)
-		menu4.AddItem("czver", "CZ75");
+		menu4.AddItem("weapon_cz75a", "CZ75");
 	if (Tec9)
-		menu4.AddItem("tecver", "TEC9");
+		menu4.AddItem("weapon_tec9", "TEC9");
 	if (P25O)
-		menu4.AddItem("p250ver", "P250");
+		menu4.AddItem("weapon_p250", "P250");
 	if (Revolver)
-		menu4.AddItem("revolverver", "REVOLVER");
+		menu4.AddItem("weapon_revolver", "REVOLVER");
 	if (fiveseven)
-		menu4.AddItem("fivesevenver", "FIVESEVEN");
+		menu4.AddItem("weapon_fiveseven", "FIVESEVEN");
 	if (marazali)
-		menu4.AddItem("marazaliver", "ÇİFT BERETTA");
+		menu4.AddItem("weapon_elite", "ÇİFT BERETTA");
 	return menu4;
 }
 
@@ -771,46 +502,7 @@ public int Menu4_Callback(Menu menu4, MenuAction action, int client, int param2)
 		{
 			char Item[32];
 			menu4.GetItem(param2, Item, sizeof(Item));
-			if (strcmp(Item, "dver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_deagle");
-			}
-			else if (strcmp(Item, "uver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_usp_silencer");
-			}
-			else if (strcmp(Item, "gver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_glock");
-			}
-			else if (strcmp(Item, "pver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_hkp2000");
-			}
-			else if (strcmp(Item, "czver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_cz75a");
-			}
-			else if (strcmp(Item, "tecver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_tec9");
-			}
-			else if (strcmp(Item, "p250ver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_p250");
-			}
-			else if (strcmp(Item, "revolverver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_revolver");
-			}
-			else if (strcmp(Item, "fivesevenver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_fiveseven");
-			}
-			else if (strcmp(Item, "marazaliver", false) == 0)
-			{
-				GivePlayerItem(client, "weapon_elite");
-			}
+			GivePlayerItem(client, Item);
 		}
 		else
 		{

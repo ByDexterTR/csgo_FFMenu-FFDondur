@@ -12,19 +12,19 @@ void SetCvar(char[] cvarName, int value)
 
 public Action HGR_OnClientHook(int client)
 {
-	if (FFAktif && GetClientTeam(client) == CS_TEAM_T)return Plugin_Handled;
+	if (bHgr && FFAktif && GetClientTeam(client) == 2)return Plugin_Handled;
 	return Plugin_Continue;
 }
 
 public Action HGR_OnClientGrab(int client)
 {
-	if (FFAktif && GetClientTeam(client) == CS_TEAM_T)return Plugin_Handled;
+	if (bHgr && FFAktif && GetClientTeam(client) == 2)return Plugin_Handled;
 	return Plugin_Continue;
 }
 
 public Action HGR_OnClientRope(int client)
 {
-	if (FFAktif && GetClientTeam(client) == CS_TEAM_T)return Plugin_Handled;
+	if (bHgr && FFAktif && GetClientTeam(client) == 2)return Plugin_Handled;
 	return Plugin_Continue;
 }
 
@@ -58,7 +58,16 @@ void YerdekiSilahlariSil()
 		{
 			GetEdictClassname(i, weapon, sizeof(weapon));
 			if ((StrContains(weapon, "weapon_") != -1 || StrContains(weapon, "item_") != -1) && GetEntDataEnt2(i, g_WeaponParent) == -1)
-				RemoveEntity(i);
+				RemoveEdict(i);
 		}
 	}
 } 
+
+bool IsValidClient(int client, bool nobots = true)
+{
+	if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client)))
+	{
+		return false;
+	}
+	return IsClientInGame(client);
+}
